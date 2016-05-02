@@ -1,0 +1,33 @@
+{% extends 'Default/simple.html.twig' %}
+{% set page = "login" %}
+
+{% block body %}
+<div class="bg-cover">
+
+	<div class="login-form">
+
+		<div class="login-top">
+			<h1>{{ server_name }}</h1>
+			<p>Login using your game account.</p>
+		</div>
+
+		<div class="login-bottom">
+			<form>
+				<fieldset class="form-group">
+					<label for="user">Username</label>
+					<input type="text" class="form-control" id="user" name="user">
+				</fieldset>
+
+				<fieldset class="form-group">
+					<label for="pass">Password</label>
+					<input type="password" class="form-control" id="pass" name="pass">
+				</fieldset>
+
+				<button type="button" class="btn btn-primary btn-block">Login</button>
+			</form>
+		</div>
+
+	</div>
+
+</div>
+{% endblock %}

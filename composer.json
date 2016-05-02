@@ -1,0 +1,14 @@
+{
+    "require": {
+        "silex/silex": "^1.3",
+        "twig/twig": "^1.23.1",
+        "symfony/yaml": "^3.0",
+        "ivoba/console-service-provider": "^2.0"
+    },
+
+    "autoload": {
+        "psr-0": {
+            "DSXI": "src/"
+        }
+    }
+}

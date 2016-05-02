@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title>{% block title %}Welcome{% endblock %} - {{ server_name }}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+
+        {# JQuery 2.2 #}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+
+        {# Bootstrap 4.0 - cus im too lazy to style my own CMS #}
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+
+        {# Font Awesome #}
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+
+        {# Custom styles #}
+        <link href="/assets/main.min.css" rel="stylesheet" type="text/css">
+        <script src="/assets/main.min.js"></script>
+    </head>
+    <body{% if page is defined %} class="page-{{ page }}"{% endif %}>
+    {% block body %}{% endblock %}
+    </body>
+</html>

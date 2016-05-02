@@ -1,0 +1,19 @@
+//
+// Style vars
+//
+$colorPrimary: #0275d8;
+$colorSuccess: #5cb85c;
+$colorInfo: #5bc0de;
+$colorWarning: #f0ad4e;
+$colorDanger: #d9534f;
+
+* { border-radius: 0 !important; }
+
+@import 'mixins.scss';
+@import 'login.scss';
+
+html, body {
+	background-color: #fff;
+	position: relative;
+	height: 100%;
+}

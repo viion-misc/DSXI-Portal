@@ -1,0 +1,40 @@
+.page-login {
+	background-image: url(/img/bg2.png);
+	background-position: center center;
+	background-size: cover;
+}
+
+.bg-cover {
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	background-color: rgba(36, 70, 110, 0.8);
+}
+
+.login-form {
+	@include center();
+	width: 400px;
+	background-color: #fff;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.8);
+	overflow: hidden;
+
+	h1 {
+		font-size: 28px;
+		font-weight: 200;
+		margin: 0;
+	}
+
+	p {
+		margin: 0;
+	}
+
+	.login-top
+	{
+		padding: 20px;
+		background-color: #eee;
+	}
+
+	.login-bottom
+	{
+		padding: 20px;
+	}
+}

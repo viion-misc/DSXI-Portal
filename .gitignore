@@ -1,0 +1,6 @@
+/node_modules/
+/vendor/
+/.vagrant/
+/app/settings.php.dist
+/pma/
+/.sass-cache/

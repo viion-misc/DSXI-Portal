@@ -1,0 +1,70 @@
+# Frontend
+server
+{
+        listen *:80;
+        server_name dsxi.server;
+        root /dsxi/web;
+        index app.php;
+        sendfile off;
+
+        gzip on;
+        gzip_disable "msie6";
+
+        gzip_vary on;
+        gzip_proxied any;
+        gzip_comp_level 6;
+        gzip_buffers 16 8k;
+        gzip_http_version 1.1;
+        gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
+        location = / {
+                try_files @site @site;
+        }
+
+        location / {
+                try_files $uri $uri/ @site;
+        }
+
+        location ~ \.php$ {
+                return 404;
+        }
+
+        location @site {
+                fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+                include fastcgi_params;
+                fastcgi_param  SCRIPT_FILENAME $document_root/app.php;
+                fastcgi_read_timeout 30;
+        }
+}
+
+
+# PhpMyAdmin
+server
+{
+        server_name db.dsxi.server;
+        listen *:80;
+        root /dsxi/pma/;
+        index index.php;
+        sendfile off;
+
+        client_max_body_size 50m;
+
+
+        # Normal directory
+        location /
+        {
+                try_files $uri $uri/ /index.php$is_args$args;
+        }
+
+        # PHP Specifics
+        location ~ \.php$
+        {
+                fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+                #fastcgi_pass 127.0.0.1:9000;
+                fastcgi_split_path_info ^(.+\.php)(/.*)$;
+                include fastcgi_params;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                fastcgi_param HTTPS off;
+                fastcgi_read_timeout 600;
+        }
+}
