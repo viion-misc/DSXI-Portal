@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 cd /dsxi/setup
-
-# colors
 source /dsxi/setup/colors.sh
 
+# Start
 Heading "++ Setting up DSXI ++"
 
 # initialize
@@ -11,15 +10,26 @@ USER=vagrant
 cd /dsxi
 sudo locale-gen en_GB.UTF-8
 
+# Settings
+mysqlPassword="dsxi"
+mysqlDbUser="dsxi"
+mysqlDbPass="dsxi"
+mysqlDbName="dsxi"
+
 # - - - - - - - - - - - - - - - - - -
 # INSTALLATION
 # - - - - - - - - - - - - - - - - - -
 
 Title "INSTALLATION"
 # latest PHP 7.0 packages
-sudo add-apt-repository -y ppa:ondrej/php
 Text "Updating"
+sudo add-apt-repository -y ppa:ondrej/php
 sudo apt-get update
+
+# Default Password
+Text "Setting Default MySQL Passwords"
+echo "mysql-server mysql-server/root_password password $mysqlPassword" | debconf-set-selections
+echo "mysql-server mysql-server/root_password_again password $mysqlPassword" | debconf-set-selections
 
 # - - - - - - - - - - - - - - - - - -
 # Install everything
@@ -31,17 +41,14 @@ sudo apt-get install -y php-apcu php7.0-dev php7.0-cli php7.0-json php7.0-fpm ph
 # - - - - - - - - - - - - - - - - - -
 # Setup MySQL
 # - - - - - - - - - - - - - - - - - -
-Text "Setting MySQL Passwords"
-echo "mysql-server mysql-server/root_password password dsxi" | debconf-set-selections
-echo "mysql-server mysql-server/root_password_again password dsxi" | debconf-set-selections
-
+#
 Title "SETUP DATABASE"
-sudo mysql --defaults-file=/etc/mysql/debian.cnf -e "GRANT ALL PRIVILEGES ON *.* TO 'dsxi'@'localhost';"
+sudo mysql --defaults-file=/etc/mysql/debian.cnf -e "GRANT ALL PRIVILEGES ON *.* TO '$mysqlDbUser'@'localhost';"
 sudo mysql --defaults-file=/etc/mysql/debian.cnf -e "FLUSH PRIVILEGES;"
 
 Text "Creating Database"
 sudo mysql --defaults-file=/etc/mysql/debian.cnf -e "CREATE DATABASE phpmyadmin;"
-sudo mysql --defaults-file=/etc/mysql/debian.cnf -e "GRANT ALL ON phpmyadmin.* TO 'dsxi'@'localhost' IDENTIFIED BY 'dsxi';"
+sudo mysql --defaults-file=/etc/mysql/debian.cnf -e "GRANT ALL ON phpmyadmin.* TO '$mysqlDbUser'@'localhost' IDENTIFIED BY '$mysqlDbPass';"
 sudo mysql --defaults-file=/etc/mysql/debian.cnf -e "FLUSH PRIVILEGES;"
 
 # - - - - - - - - - - - - - - - - - -
