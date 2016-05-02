@@ -1,0 +1,33 @@
+.alert {
+	color: #fff;
+	border: none;
+	padding: 15px;
+
+	h1, h2, h3, h4, h5, h6 {
+		margin: 0;
+	}
+
+	&.alert-center {
+		text-align: center;
+	}
+}
+
+.alert-success {
+	background-color: $colorSuccess;
+}
+
+.alert-primary {
+	background-color: $colorPrimary;
+}
+
+.alert-info {
+	background-color: $colorInfo;
+}
+
+.alert-warning {
+	background-color:$colorWarning;
+}
+
+.alert-danger {
+	background-color: $colorDanger;
+}

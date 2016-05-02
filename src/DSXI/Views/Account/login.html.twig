@@ -12,7 +12,14 @@
 		</div>
 
 		<div class="login-bottom">
-			<form>
+
+			{% if app.request.get('user')|length > 2 %}
+			<div class="alert alert-danger alert-center">
+				Incorrect login details
+			</div>
+			{% endif %}
+
+			<form method="post">
 				<fieldset class="form-group">
 					<label for="user">Username</label>
 					<input type="text" class="form-control" id="user" name="user">
@@ -23,7 +30,7 @@
 					<input type="password" class="form-control" id="pass" name="pass">
 				</fieldset>
 
-				<button type="button" class="btn btn-primary btn-block">Login</button>
+				<button type="submit" class="btn btn-primary btn-block">Login</button>
 			</form>
 		</div>
 

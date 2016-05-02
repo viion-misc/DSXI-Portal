@@ -4,15 +4,20 @@ namespace DSXI\Routes;
 
 use Symfony\Component\HttpFoundation\Request;
 use Ivoba\Silex\Provider\ConsoleServiceProvider;
+
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
 use Silex\Application;
+
+use DSXI\Apps\Account\User;
+use DSXI\Apps\Misc\Cookie;
 
 class App extends \DSXI\Handle
 {
     use Home;
     use Account;
 
+    // Silex Application!
     public $Silex;
 
     //
@@ -56,6 +61,7 @@ class App extends \DSXI\Handle
         $this->Silex->register(new ConsoleServiceProvider(), CONSOLE_CONFIG);
         $this->Silex->before(function (Request $request)
         {
+            $this->addGlobal('user', new User());
             $this->addGlobal('server_name', SERVER_NAME);
         });
 
@@ -87,7 +93,7 @@ class App extends \DSXI\Handle
     //
     public function redirect($url)
     {
-        return $this->get()->redirect($url);
+        return $this->Silex->redirect($url);
     }
 
     //

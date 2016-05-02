@@ -10,6 +10,7 @@ $colorDanger: #d9534f;
 * { border-radius: 0 !important; }
 
 @import 'mixins.scss';
+@import 'bootstrap.scss';
 @import 'login.scss';
 
 html, body {

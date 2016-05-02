@@ -1,5 +1,12 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block body %}
-Home
+
+	{% if user.isonline %}
+	Welcome back <strong>{{ user.name }}</strong>
+	{% else %}
+	Please login
+	{% endif %}
+
+
 {% endblock %}
