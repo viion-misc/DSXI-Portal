@@ -12,10 +12,11 @@ use Silex\Application;
 use DSXI\Apps\Account\User;
 use DSXI\Apps\Misc\Cookie;
 
-class App extends \DSXI\Handle
+class SilexApp extends \DSXI\Handle
 {
     use Home;
     use Account;
+    use Server;
 
     // Silex Application!
     public $Silex;
@@ -61,8 +62,9 @@ class App extends \DSXI\Handle
         $this->Silex->register(new ConsoleServiceProvider(), CONSOLE_CONFIG);
         $this->Silex->before(function (Request $request)
         {
-            $this->addGlobal('user', new User());
+            $this->addGlobal('user', $this->getUser());
             $this->addGlobal('server_name', SERVER_NAME);
+            $this->addGlobal('server_logo', SERVER_LOGO);
         });
 
         // boot
@@ -152,5 +154,25 @@ class App extends \DSXI\Handle
     protected function addFilter($filter)
     {
         $this->Silex['twig']->addFilter($filter);
+    }
+
+    //
+    // Get the current user
+    //
+    protected function getUser()
+    {
+        return new User();
+    }
+
+    //
+    // Ensure the user is online
+    //
+    protected function mustBeOnline()
+    {
+        $user = $this->getUser();
+        if (!$user->isOnline()) {
+            header('Location: /login');
+            exit();
+        }
     }
 }
