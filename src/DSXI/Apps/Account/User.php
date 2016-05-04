@@ -22,6 +22,8 @@ class User extends \DSXI\Handle
 	public $status;
 	public $priv;
 	public $accountId;
+	public $level;
+	public $characters = [];
 
 	function __construct()
 	{
@@ -40,6 +42,11 @@ class User extends \DSXI\Handle
 				$this->contentId = $user['content_ids'];
 				$this->status = $user['status'];
 				$this->priv = $user['priv'];
+				$this->level = $user['level'];
+
+				foreach($user['characters'] as $chardata) {
+					$this->characters[] = new Character($chardata);
+				}
 			}
 		}
 	}
@@ -52,13 +59,11 @@ class User extends \DSXI\Handle
 		return ($this->id && $this->name);
 	}
 
-	public function getId()
+	//
+	// Is an admin?
+	//
+	public function isAdmin()
 	{
-		return $this->id;
-	}
-
-	public function getName()
-	{
-		return $this->name;
+		return $this->level > 0 ? true : false;
 	}
 }
