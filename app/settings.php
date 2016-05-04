@@ -5,6 +5,7 @@
 return [
     // Game Server
     'server_name' => 'DSXI',
+    'server_logo' => 'https://wiki.dspt.info/images/dslogo.jpg',
 
     // Site settings
     'silex_debug' => true,
