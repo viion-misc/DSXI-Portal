@@ -12,3 +12,25 @@
         {% endfor %}
     </ol>
 {% endmacro %}
+
+{% macro server(type, title, id, help) %}
+<fieldset class="form-group server-field-row">
+    <div class="row">
+        <div class="col-md-3">
+            <label for="{{ id }}">{{ title }}</label>
+        </div>
+        <div class="col-md-4">
+            {% if type == 'text' or type == 'checkbox' %}
+                <input type="{{ type }}" class="form-control" id="{{ id }}" name="{{ id }}">
+            {% elseif type == 'textarea' %}
+                <textarea class="form-control" id="{{ id }}" name="{{ id }}"></textarea>
+            {% endif %}
+        </div>
+        <div class="col-md-5">
+            {% if help is defined and help is not empty %}
+                <small>{{ help }}</small>
+            {% endif %}
+        </div>
+    </div>
+</fieldset>
+{% endmacro %}

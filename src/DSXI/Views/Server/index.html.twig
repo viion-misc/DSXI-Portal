@@ -1,0 +1,60 @@
+{% extends 'Default/base.html.twig' %}
+{% set page = 'server' %}
+
+{% block body %}
+
+	{{ Macros.breadcrum([
+		[ 'Server', '/' ],
+	]) }}
+
+	<div class="page">
+		<form method="post">
+
+			<h1>Server</h1>
+			<p>
+				Here you can manage the <strong>server settings</strong>, this includes everything about how it is run and
+				what kind of features you would like to provide. Multiple settings can be created and saved to allow
+				flexibility in customizing your server.
+			</p>
+			<p>
+				Values not set will be set to the default based on the latest file. If any of the configuration files have changed since
+				this site was updated, saving will not be possible (work in progress)
+			</p>
+
+			<hr>
+
+			<div class="server-group">
+				<h2>Expansions</h2>
+				<p>
+					Choose which expansions you would like to enable on the server.
+				</p>
+				{{ Macros.server('checkbox', 'Chains of Promathia', 'ENABLE_COP') }}
+				{{ Macros.server('checkbox', 'Treasures of Aht Urhgan', 'ENABLE_TOAU') }}
+				{{ Macros.server('checkbox', 'Wings of the Goddess', 'ENABLE_WOTG') }}
+				{{ Macros.server('checkbox', 'A Crystalline Prophecy', 'ENABLE_ACP') }}
+				{{ Macros.server('checkbox', 'A Moogle Kupo d\'Etat', 'ENABLE_AMK') }}
+				{{ Macros.server('checkbox', 'A Shantotto Ascensiona', 'ENABLE_ASA') }}
+				{{ Macros.server('checkbox', 'Abyssea', 'ENABLE_ABYSSEA') }}
+				{{ Macros.server('checkbox', 'Seekers of Adoulin', 'ENABLE_SOA') }}
+				{{ Macros.server('checkbox', 'Rhapsodies of Vana\'diel', 'ENABLE_ROV') }}
+
+				<p>
+					Setting to lock content more accurately to the expansions you have defined above.
+					This generally results in a more accurate presentation of your selected expansions
+					as well as a less confusing player experience for things that are disabled
+					(things that are disabled are not loaded).
+					This feature correlates to the required_expansion column in the SQL files
+				</p>
+
+				{{ Macros.server('checkbox', 'Restrict Expansions', 'RESTRICT_BY_EXPANSION') }}
+			</div>
+
+			<hr>
+
+			<button type="submit" class="btn btn-success btn-block btn-lg">Save Server Settings and Restart Server</button>
+
+
+		</form>
+	</div>
+
+{% endblock %}
