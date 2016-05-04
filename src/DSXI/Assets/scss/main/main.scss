@@ -10,11 +10,8 @@ $colorDanger: #d9534f;
 * { border-radius: 0 !important; }
 
 @import 'mixins.scss';
+@import 'reset.scss';
 @import 'bootstrap.scss';
 @import 'login.scss';
-
-html, body {
-	background-color: #fff;
-	position: relative;
-	height: 100%;
-}
+@import 'base.scss';
+@import 'styles.scss';

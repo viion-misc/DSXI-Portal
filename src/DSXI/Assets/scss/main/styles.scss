@@ -1,0 +1,67 @@
+.page {
+	margin: 20px 0;
+}
+
+.server-group {
+	background-color: #f5f5f5;
+
+	p {
+		margin: 0;
+		padding: 15px;
+	}
+
+	h2 {
+		background-color: $colorPrimary;
+		color: #fff;
+		font-size: 20px;
+		text-transform: uppercase;
+		padding: 15px;
+	}
+}
+
+.server-field-row {
+	margin: 0;
+	padding: 5px;
+
+	* {
+		display: block;
+		line-height: 24px;
+		padding: 6px 8px;
+	}
+
+	label {
+		font-size: 14px;
+		font-weight: 700;
+	}
+
+	small {
+		font-size: 13px;
+		color: #666;
+	}
+
+	input[type="checkbox"] {
+		width: 30px;
+		height: 30px;
+
+		cursor: pointer;
+		border: 1px solid #eee;
+
+        border-radius: 0;
+        background-image: url(/img/cross.png);
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: 16px 16px;
+		-webkit-appearance: textfield;
+	    -moz-appearance: textfield;
+	    appearance: textfield;
+        margin: 2px;
+
+        &:checked {
+            background-image: url(/img/tick.png);
+        }
+
+        &:focus {
+            outline: 0;
+        }
+	}
+}
