@@ -1,12 +1,16 @@
 {% extends 'Default/base.html.twig' %}
+{% set page = 'dashboard' %}
 
 {% block body %}
 
-	{% if user.isonline %}
-	Welcome back <strong>{{ user.name }}</strong>
-	{% else %}
-	Please login
-	{% endif %}
+	{{ Macros.breadcrum([
+		[ 'Dashboard', '/' ],
+	]) }}
 
+	<div class="page">
 
+		<h1>Dashboard</h1>
+
+	</div>
+	
 {% endblock %}

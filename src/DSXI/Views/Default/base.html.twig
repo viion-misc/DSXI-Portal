@@ -1,3 +1,4 @@
+{% import 'Default/macros.html.twig' as Macros %}
 <html>
     <head>
         <title>{% block title %}Welcome{% endblock %} - {{ server_name }}</title>
@@ -14,11 +15,49 @@
         {# Font Awesome #}
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 
+        {# Google Fonts #}
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300' rel='stylesheet' type='text/css'>
+
         {# Custom styles #}
         <link href="/assets/main.min.css" rel="stylesheet" type="text/css">
         <script src="/assets/main.min.js"></script>
     </head>
     <body>
-    {% block body %}{% endblock %}
+
+        <nav>
+            <header></header>
+
+            <div class="menu">
+                <ul>
+                    <li><a href="/" {% if page == 'dashboard' %}class="active"{% endif %}>Dashboard</a></li>
+                    <li><a href="/characters" {% if page == 'characters' %}class="active"{% endif %}>Characters</a></li>
+                    <li><a href="/server" {% if page == 'server' %}class="active"{% endif %}>Server</a></li>
+                </ul>
+            </div>
+
+
+            <footer>
+                <ul>
+                    <li>
+                        <em>Logged in as</em>
+                        {{ user.name }}
+                    </li>
+                    <li>
+                        <a href="">Logout</a>
+                    </li>
+                    <li class="copyright">
+                        Built by <a href="https://twitter.com/viion" target="_blank">@viion</a><br>
+                        <a href="https://github.com/viion/DSXI-Portal" target="_blank"><i class="fa fa-github-alt" aria-hidden="true"></i> Github</a> <br>
+                        MIT License {{ "now"|date("Y") }}
+                    </li>
+                </ul
+            </footer>
+
+        </nav>
+
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+
     </body>
 </html>

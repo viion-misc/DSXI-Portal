@@ -19,16 +19,28 @@ class UserStorage extends \DSXI\Handle
 	//
 	public function getUserViaSession($session)
 	{
-		$query = 'SELECT * FROM accounts
-			LEFT JOIN accounts_sessions_web ON accounts_sessions_web.account_id = accounts.id
-			WHERE accounts_sessions_web.session = :session
+		$query = 'SELECT
+			accounts.id, accounts.login, accounts.email, accounts.email2,
+			accounts.timecreate, accounts.timelastmodify, accounts.content_ids,
+			accounts.status, accounts.priv, portal_accounts_permissions.level
+			FROM accounts
+			LEFT JOIN portal_accounts_sessions ON portal_accounts_sessions.account_id = accounts.id
+			LEFT JOIN portal_accounts_permissions ON portal_accounts_permissions.account_id = accounts.id
+			WHERE portal_accounts_sessions.session = :session
 			LIMIT 0,1';
 
 		$user = $this->dbs->sql($query, [
 			':session' => $session,
 		]);
 
-		return $user ? $user[0] : false;
+		$user = $user ? $user[0] : false;
+
+		// if user, get characters
+		if ($user) {
+			$user['characters'] = (new CharacterStorage())->getCharactersByUserId($user['id']);
+		}
+
+		return $user;
 	}
 
 	//
@@ -49,10 +61,15 @@ class UserStorage extends \DSXI\Handle
 	//
 	public function updateUserSession($id, $session)
 	{
-		return $this->dbs
-			->sql('INSERT INTO accounts_sessions_web (account_id, session) VALUES (:id, :session) ON DUPLICATE KEY UPDATE session=VALUES(session)', [
+		$this->dbs
+			->sql('INSERT INTO portal_accounts_sessions (account_id, session) VALUES (:id, :session) ON DUPLICATE KEY UPDATE session=VALUES(session)', [
 				':id' => $id,
 				':session' => $session,
+			]);
+
+		$this->dbs
+			->sql('INSERT INTO portal_accounts_permissions (account_id) VALUES (:id) ON DUPLICATE KEY UPDATE account_id=VALUES(account_id)', [
+				':id' => $id,
 			]);
 	}
 }

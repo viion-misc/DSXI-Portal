@@ -1,0 +1,44 @@
+{% extends 'Default/base.html.twig' %}
+{% set page = 'characters' %}
+
+{% block body %}
+
+	{{ Macros.breadcrum([
+		[ 'Characters', '/characters' ],
+	]) }}
+
+	<div class="page">
+
+		<h1>Your Characters</h1>
+
+		{% if user.characters %}
+			<table class="table">
+				<thead>
+					<tr>
+						<th width="5%">ID</th>
+						<th width="30%">Name</th>
+						<th width="20%">Job/Class</th>
+						<th width="45%">Playtime</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for character in user.characters %}
+					<tr>
+						<th scope="row">{{ character.id }}</th>
+						<td><a href="/characters/update/{{ character.id }}/{{ character.name }}">{{ character.name }}</a></td>
+						<td>-</td>
+						<td>{{ character.playtime.days }} days, {{ character.playtime.hours }} hours, {{ character.playtime.minutes }} minutes</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+		<div class="alert alert-warning">
+			You have no characters, hope in game and make one!
+		</div>
+		{% endif %}
+
+	</div
+
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% macro breadcrum(links) %}
+    <ol class="breadcrumb">
+        {% for i,link in links %}
+            {% set name = link[0] %}
+            {% set url = link[1] is defined ? link[1] : false %}
+
+            {% if url == false %}
+                <li class="active">{{ name }}</li>
+            {% else %}
+                <li><a href="{{ url }}">{{ name }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ol>
+{% endmacro %}

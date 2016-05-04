@@ -13,6 +13,8 @@ trait Home
         //
         $this->route('/', 'GET', function(Request $request)
         {
+            $this->mustBeOnline();
+
             return $this->respond('Home/index.html.twig');
         });
 
@@ -21,12 +23,9 @@ trait Home
         //
         $this->route('/characters', 'GET', function(Request $request)
         {
-            $db = $this->get('database');
-            $characters = $db->sql('SELECT * FROM chars');
+            $this->mustBeOnline();
 
-            show($characters);
-
-            return $this->respond('Home/index.html.twig');
+            return $this->respond('Characters/index.html.twig');
         });
     }
 }
