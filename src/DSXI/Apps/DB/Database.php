@@ -58,7 +58,7 @@ class Database
     //
     public function sql($sql, $binds = [], $isSingle = false)
     {
-        $sql = trim($sql);
+        $sql = trim(preg_replace('/\s\s+/', ' ', $sql));
 
         try
         {
