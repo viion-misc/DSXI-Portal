@@ -13,24 +13,28 @@
     </ol>
 {% endmacro %}
 
-{% macro server(type, title, id, help) %}
+{% macro server(setting) %}
+{% set value = setting.set_value ? setting.set_value : setting.default_value %}
 <fieldset class="form-group server-field-row">
-    <div class="row">
-        <div class="col-md-3">
-            <label for="{{ id }}">{{ title }}</label>
+    {% if setting.type == 'checkbox' %}
+        <input type="checkbox" class="form-control" id="{{ setting.variable }}" name="{{ setting.variable }}" {% if value %}checked="checked"{% endif %}>
+        <label for="{{ setting.variable }}">{{ setting.name }}</label>
+    {% else %}
+        <div class="row">
+            <div class="col-md-4">
+                <label for="{{ setting.variable }}">{{ setting.name }}</label>
+            </div>
+            <div class="col-md-8">
+                {% if setting.type == 'text' %}
+                    <input type="{{ setting.type }}" class="form-control" id="{{ setting.variable }}" name="{{ setting.variable }}" value="{{ value }}">
+                {% elseif setting.type == 'textarea' %}
+                    <textarea class="form-control" id="{{ setting.variable }}" name="{{ setting.variable }}">{{ value }}</textarea>
+                {% endif %}
+                {% if setting.help is defined and setting.help is not empty %}
+                    <small>{{ setting.help }}</small>
+                {% endif %}
+            </div>
         </div>
-        <div class="col-md-4">
-            {% if type == 'text' or type == 'checkbox' %}
-                <input type="{{ type }}" class="form-control" id="{{ id }}" name="{{ id }}">
-            {% elseif type == 'textarea' %}
-                <textarea class="form-control" id="{{ id }}" name="{{ id }}"></textarea>
-            {% endif %}
-        </div>
-        <div class="col-md-5">
-            {% if help is defined and help is not empty %}
-                <small>{{ help }}</small>
-            {% endif %}
-        </div>
-    </div>
+    {% endif %}
 </fieldset>
 {% endmacro %}

@@ -86,6 +86,17 @@ class SilexApp extends \DSXI\Handle
     //
     public function respond($template, $data = [])
     {
+        // add alerts
+        $session = $this->get('session');
+        $data['alerts'] = [
+            'success' => $session->get('success'),
+            'error' => $session->get('error'),
+        ];
+
+        // remove sessions
+        $session->remove('success');
+        $session->remove('error');
+
         // response
         return $this->get('twig')->render($template, $data);
     }

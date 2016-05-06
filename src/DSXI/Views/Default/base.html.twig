@@ -16,7 +16,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 
         {# Google Fonts #}
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,500,700" rel="stylesheet" type="text/css">
 
         {# Custom styles #}
         <link href="/assets/main.min.css" rel="stylesheet" type="text/css">
@@ -40,7 +40,7 @@
                 <ul>
                     <li>
                         <em>Logged in as</em>
-                        {{ user.name }}
+                        <span class="username">{{ user.name }}</span>
                     </li>
                     <li>
                         <a href="">Logout</a>
@@ -56,6 +56,19 @@
         </nav>
 
         <main>
+            {% if alerts.success is defined and alerts.success %}
+                <div class="alert alert-success" role="alert">
+                    <i class="fa fa-thumbs-o-up"></i> &nbsp; {{ alerts.success }}
+                </div>
+            {% endif %}
+
+            {% if alerts.error is defined and alerts.error %}
+                <div class="alert alert-success" role="alert">
+                    <i class="fa fa-exclamation-circle"></i> &nbsp; {{ alerts.error }}
+                </div>
+            {% endif %}
+
+
             {% block body %}{% endblock %}
         </main>
 

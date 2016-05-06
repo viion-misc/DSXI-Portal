@@ -3,6 +3,7 @@
 	border: none;
 	padding: 15px;
 	margin: 10px 0;
+	font-size: 16px;
 
 	h1, h2, h3, h4, h5, h6 {
 		margin: 0;
@@ -14,21 +15,21 @@
 }
 
 .alert-success {
-	background-color: darken($colorSuccess, 15%);
+	background-color: darken($colorSuccess, 10%);
 }
 
 .alert-primary {
-	background-color: darken($colorPrimary, 15%);
+	background-color: darken($colorPrimary, 10%);
 }
 
 .alert-info {
-	background-color: darken($colorInfo, 15%);
+	background-color: darken($colorInfo, 10%);
 }
 
 .alert-warning {
-	background-color: darken($colorWarning, 15%);
+	background-color: darken($colorWarning, 10%);
 }
 
 .alert-danger {
-	background-color: darken($colorDanger, 15%);
+	background-color: darken($colorDanger, 10%);
 }

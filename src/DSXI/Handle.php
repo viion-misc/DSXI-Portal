@@ -16,6 +16,7 @@ class Handle
         {
             case 'database': return new \DSXI\Apps\DB\Database(DB_HOST, DB_NAME, DB_USER, DB_PASS); break;
             case 'cookie': return new \DSXI\Apps\Misc\Cookie(); break;
+            case 'session': return new \DSXI\Apps\Misc\Session(); break;
         }
 
         if (property_exists($this, 'Silex')) {

@@ -3,7 +3,7 @@
 namespace DSXI\Storage;
 
 //
-// User Storage
+// Character Storage
 //
 class CharacterStorage extends \DSXI\Handle
 {
