@@ -7,6 +7,10 @@ return [
     'server_name' => 'DSXI',
     'server_logo' => 'https://wiki.dspt.info/images/dslogo.jpg',
 
+    // Adjust the delay (seconds) for starting/stopping the server.
+    // Do not set this below 30 seconds or you will have issues!
+    'server_restart_delay' => 60,
+
     // Site settings
     'silex_debug' => true,
     'domain' => '.dsxi.server',

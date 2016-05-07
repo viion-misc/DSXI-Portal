@@ -2,6 +2,15 @@
 	margin: 20px 0;
 }
 
+.form-actions {
+	text-align: right;
+	margin-bottom: 20px;
+}
+
+.restart-countdown {
+	font-size: 18px;
+}
+
 .server-group {
 	background-color: #f5f5f5;
 	margin-bottom: 20px;
@@ -9,6 +18,7 @@
 	p {
 		margin: 0;
 		padding: 15px;
+		background-color: #ddd;
 	}
 
 	h2 {
@@ -17,28 +27,52 @@
 		font-size: 20px;
 		text-transform: uppercase;
 		padding: 15px;
+		cursor: pointer;
+
+		&:hover {
+			background-color: lighten($colorPrimary, 5%);
+		}
+	}
+
+	i {
+		margin: 3px 10px 0 0;
+		font-size: 14px;
+		vertical-align: top;
+	}
+
+	> div {
+		display: none;
+
+		&.active {
+			display: block;
+		}
+
+		fieldset {
+			margin: 0;
+			padding: 10px 15px;
+
+			&:first-of-type {
+				padding-top: 15px;
+			}
+
+			&:last-of-type {
+				padding-bottom: 25px;
+			}
+		}
 	}
 }
 
 .server-field-row {
-	margin: 0;
-	padding: 5px;
-
-	* {
-		display: block;
-		line-height: 24px;
-		padding: 6px 8px;
-	}
-
 	label {
 		font-size: 14px;
 		font-weight: 700;
 	}
 
 	small {
-		font-size: 13px;
 		color: #666;
-		padding: 8px 0;
+		font-size: 12px;
+		padding: 5px 0 0 0;
+		display: block;
 	}
 
 	input[type="checkbox"] {
@@ -46,7 +80,7 @@
 		height: 30px;
 
 		cursor: pointer;
-		border: 1px solid #eee;
+		border: 1px solid #ccc;
 
         border-radius: 0;
         background-image: url(/img/cross.png);
@@ -56,10 +90,11 @@
 		-webkit-appearance: textfield;
 	    -moz-appearance: textfield;
 	    appearance: textfield;
-        margin: 2px;
+        margin: 2px 0;
 
         &:checked {
             background-image: url(/img/tick.png);
+			border: 1px solid lighten($colorSuccess, 20%);
         }
 
         &:focus {
@@ -70,6 +105,7 @@
 
 .checkbox-group {
 	@include cf();
+	padding: 10px;
 
 	fieldset {
 		width: 140px;
@@ -77,14 +113,35 @@
 		text-align: center;
 		padding: 10px;
 		vertical-align: top;
-		
+
 		label {
 			line-height: 15px;
 			font-size: 13px;
+			display: block;
 		}
 
 		input {
 			display: inline-block;
 		}
+	}
+}
+
+.panel {
+	background-color: #eee;
+	margin-bottom: 20px;
+
+	h2 {
+		font-size: 24px;
+		background-color: #ddd;
+		padding: 20px;
+	}
+
+	&.panel-danger h2 {
+		background-color: $colorDanger;
+		color: #fff;
+	}
+
+	> div {
+		padding: 20px;
 	}
 }

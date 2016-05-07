@@ -1,0 +1,246 @@
+{% extends 'Default/base.html.twig' %}
+{% set page = 'server' %}
+
+{% block body %}
+
+	{{ Macros.breadcrum([
+		[ 'Server', '/server' ],
+		[ 'Settings' ],
+	]) }}
+
+	<div class="page">
+		<form method="post" class="server-settings-form">
+
+			<h1>Server</h1>
+			<p>
+				Here you can manage the <strong>server settings</strong>, this includes everything about how it is run and
+				what kind of features you would like to provide. Multiple settings can be created and saved to allow
+				flexibility in customizing your server.
+			</p>
+			<p>
+				Values not set will be set to the default based on the latest file. If any of the configuration files have changed since
+				this site was updated, saving will not be possible (work in progress)
+			</p>
+
+			<div class="alert alert-info">
+				<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+				Saving this form will restart the server. It takes {{ server_restart_delay }} seconds to fully restart the server.
+			</div>
+
+			<hr>
+
+			<div class="form-actions">
+				<button type="button" class="btn btn-primary-outline form-expand-all" id="formExpandAll">Expand All</button>
+			</div>
+
+			<div class="server-group">
+				<h2><i class="fa fa-plus" aria-hidden="true"></i> Messages</h2>
+				<div>
+					<p>Set common messages that appear in-game.</p>
+					{% for setting in settings.messages %}
+						{{ Macros.server(setting) }}
+					{% endfor %}
+				</div>
+			</div>
+
+			<div class="server-group">
+				<h2><i class="fa fa-plus" aria-hidden="true"></i> Expansions</h2>
+				<div>
+					<p>Enable or disable specific expansions.</p>
+
+					<div class="checkbox-group">
+					{% for setting in settings.expansions %}
+						{{ Macros.server(setting, true) }}
+					{% endfor %}
+					</div>
+
+					<p>
+						Enable or Disable your chosen restrictions.
+						This generally results in a more accurate presentation of your selected expansions
+						as well as a less confusing player experience for things that are disabled
+						(things that are disabled are not loaded).
+					</p>
+
+					{% for setting in settings.expansions_global %}
+						{{ Macros.server(setting) }}
+					{% endfor %}
+				</div>
+			</div>
+
+			<div class="server-group">
+				<h2><i class="fa fa-plus" aria-hidden="true"></i> Maps</h2>
+				<div>
+					<p>Change settings related to the game environment</p>
+					{% for setting in settings.map %}
+						{{ Macros.server(setting) }}
+					{% endfor %}
+				</div>
+			</div>
+
+			<div class="server-group">
+				<h2><i class="fa fa-plus" aria-hidden="true"></i> Character</h2>
+				<div>
+					<p>Character specific settings</p>
+					{% for setting in settings.character %}
+						{{ Macros.server(setting) }}
+					{% endfor %}
+				</div>
+			</div>
+
+			<div class="server-group">
+				<h2><i class="fa fa-plus" aria-hidden="true"></i> Misc</h2>
+				<div>
+					<p>Various different settings</p>
+					{% for setting in settings.misc %}
+						{{ Macros.server(setting) }}
+					{% endfor %}
+				</div>
+			</div>
+
+			<div class="server-group">
+				<h2><i class="fa fa-plus" aria-hidden="true"></i> Skills</h2>
+				<div>
+					<p>Adjust how some skills work</p>
+					{% for setting in settings.skills %}
+						{{ Macros.server(setting) }}
+					{% endfor %}
+				</div>
+			</div>
+
+			<div class="server-group">
+				<h2><i class="fa fa-plus" aria-hidden="true"></i> Rates</h2>
+				<div>
+					<p>Tweak progress rates</p>
+					{% for setting in settings.rates %}
+						{{ Macros.server(setting) }}
+					{% endfor %}
+				</div>
+			</div>
+
+			<div class="server-group">
+				<h2><i class="fa fa-plus" aria-hidden="true"></i> HNM</h2>
+				<div>
+					<p>Sets spawn type for: Behemoth, Fafnir, Adamantoise,
+						King Behemoth, Nidhog, Aspidochelone. Use 0 for timed spawns,
+						1 for force pop only, 2 for both</p>
+					{% for setting in settings.hnm %}
+						{{ Macros.server(setting) }}
+					{% endfor %}
+				</div>
+			</div>
+
+			<div class="server-group">
+				<h2><i class="fa fa-plus" aria-hidden="true"></i> Dynamis</h2>
+				<div>
+					<p>Handle Dynamis requirements</p>
+					{% for setting in settings.dynamis %}
+						{{ Macros.server(setting) }}
+					{% endfor %}
+				</div>
+			</div>
+
+			<div class="server-group">
+				<h2><i class="fa fa-plus" aria-hidden="true"></i> Limbus</h2>
+				<div>
+					<p>Handle Limbus requirementss</p>
+					{% for setting in settings.limbus %}
+						{{ Macros.server(setting) }}
+					{% endfor %}
+				</div>
+			</div>
+
+			<div class="server-group">
+				<h2><i class="fa fa-plus" aria-hidden="true"></i> Abyssea</h2>
+				<div>
+					<p>Abyssea settings</p>
+					{% for setting in settings.abyssea %}
+						{{ Macros.server(setting) }}
+					{% endfor %}
+				</div>
+			</div>
+
+			<div class="server-group">
+				<h2><i class="fa fa-plus" aria-hidden="true"></i> Gathering</h2>
+				<div>
+					<p>Tweak gathering chances</p>
+					{% for setting in settings.gathering %}
+						{{ Macros.server(setting) }}
+					{% endfor %}
+				</div>
+			</div>
+
+			<div class="server-group">
+				<h2><i class="fa fa-plus" aria-hidden="true"></i> Coffers</h2>
+				<div>
+					<p>SE implemented coffer/chest illusion time in order to
+						prevent coffer farming. No-one in the same area can open
+						a chest or coffer for loot (gil, gems & items) till a
+						random time between min and max.
+						During this time players can loot keyitem and item related
+						to quests (AF, maps... etc.)</p>
+					{% for setting in settings.coffers %}
+						{{ Macros.server(setting) }}
+					{% endfor %}
+				</div>
+			</div>
+
+
+			<div class="server-group">
+				<h2><i class="fa fa-plus" aria-hidden="true"></i> Events</h2>
+				<div>
+					<p>Manage In-Game events</p>
+					{% for setting in settings.events %}
+						{{ Macros.server(setting) }}
+					{% endfor %}
+				</div>
+			</div>
+
+			<div class="server-group">
+				<h2><i class="fa fa-plus" aria-hidden="true"></i> Database</h2>
+				<div>
+					<p>Change the games database details</p>
+					{% for setting in settings.database %}
+						{{ Macros.server(setting) }}
+					{% endfor %}
+				</div>
+			</div>
+
+			<button type="submit" class="btn btn-success btn-block btn-lg">Save Server Settings and Restart Server</button>
+
+		</form>
+
+		<div id="saveServerSettingsModal" class="modal fade">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Restarting Server</h4>
+					</div>
+					<div class="modal-body">
+						<p>Server Settings have been saved, your server is restarting.
+							This takes roughly {{ server_restart_delay }} seconds.
+							Please allow it time to finish before trying to log back into the game.</p>
+
+						<div class="restart-countdown">
+							<strong>Restart Timer:</strong> <em>{{ server_restart_delay }}</em>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<hr>
+
+		<div class="panel panel-danger">
+			<h2>Recover Settings</h2>
+			<div>
+				<p>If you need to recover the settings, click "Recover" below, this will download the latest settings
+				file from GitHub and replace it over your saved settings. <strong>This does not change your saved settings
+				on the web portal, only behind the scenes.</strong></p>
+
+				<a href="/server/recover" class="btn btn-danger-outline">Recover Settings</a>
+			</div>
+		</div>
+
+	</div>
+
+{% endblock %}

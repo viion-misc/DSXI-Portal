@@ -83,6 +83,7 @@ sudo sed -i 's|upload_max_filesize = 2M|upload_max_filesize = 64M|' /etc/php/7.0
 sudo sed -i 's|post_max_size = 8M|post_max_size = 64M|' /etc/php/7.0/fpm/php.ini
 sudo sed -i 's|max_execution_time = 30|max_execution_time = 300|' /etc/php/7.0/fpm/php.ini
 sudo sed -i 's|;request_terminate_timeout = 0|request_terminate_timeout = 300|' /etc/php/7.0/fpm/pool.d/www.conf
+sudo sed -i 's|;pm.process_idle_timeout = 10s|pm.process_idle_timeout = 300s|' /etc/php/7.0/fpm/pool.d/www.conf
 sudo sed -i "s|user www-data|user $USER|" /etc/nginx/nginx.conf
 sudo sed -i "s|www-data|$USER|" /etc/php/7.0/fpm/pool.d/www.conf
 

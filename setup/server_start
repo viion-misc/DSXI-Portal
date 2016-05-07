@@ -1,0 +1,11 @@
+#!/bin/bash
+FF_DIR='/home/vagrant/ffxi'
+cd $FF_DIR/
+
+echo "Starting Servers ..."
+/usr/bin/screen -dmS lobby $FF_DIR/dsconnect
+sleep 2
+/usr/bin/screen -dmS game $FF_DIR/dsgame
+sleep 2
+/usr/bin/screen -dmS search $FF_DIR/dssearch
+screen -ls

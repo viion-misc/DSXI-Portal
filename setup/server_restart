@@ -1,0 +1,6 @@
+#!/bin/bash
+echo "Restarting Servers ..."
+bash server_stop
+echo "Waiting 30 seconds before starting ..."
+sleep 30
+bash server_start

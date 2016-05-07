@@ -1,1 +1,3 @@
-console.log('hello');
+$(() => {
+	var ServerSettings = new ServerSettingsClass();
+})

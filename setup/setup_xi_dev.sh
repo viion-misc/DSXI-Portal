@@ -126,17 +126,9 @@ perl -pi -e 's/    search_config.mysql_password = "root";/    search_config.mysq
 perl -pi -e 's/    search_config.mysql_database = "dspdb";/    search_config.mysql_database = "'$mysqlDbName'";/g' $serverInstallPath/src/search/search.cpp
 Text "Database Created Successfully"
 
-Info "Creating Start/Stop/Restart scripts."
-sudo touch /etc/init.d/ffxi;sudo chown $userID:$groupID /etc/init.d/ffxi;sudo chmod 755 /etc/init.d/ffxi
-echo -e "#!/bin/bash\nFF_DIR='"$serverInstallPath"'\ncase \"\$1\" in\n   start)\n   cd \$FF_DIR/\n      /usr/bin/screen -dmS lobby \$FF_DIR/dsconnect\n      echo 'Lobby has Started.'\n      /usr/bin/screen -dmS game \$FF_DIR/dsgame\n      echo 'Game has Started.'\n      /usr/bin/screen -dmS search \$FF_DIR/dssearch\n      echo 'Search has Started.'\n      cd \$FF_DIR/auctionhouse/bin/\n      /usr/bin/screen -dmS auction \$FF_DIR/auctionhouse/bin/broker.py\n      echo 'Auction House has Started.'\n   ;;\n   stop)\n      /usr/bin/screen -XS lobby quit\n      echo 'Lobby has been Shutdown.'\n      /usr/bin/screen -XS game quit\n      echo 'Game has been Shutdown.'\n      /usr/bin/screen -XS search quit\n      echo 'Search has been Shutdown.'\n      /usr/bin/screen -XS auction quit\n      echo 'Auction House has been Shutdown.'\n   ;;\n   restart)\n      /usr/bin/screen -XS lobby quit\n      echo 'Lobby has been Shutdown.'\n      /usr/bin/screen -XS game quit\n      echo 'Game has been Shutdown.'\n      /usr/bin/screen -XS search quit\n      echo 'Search has been Shutdown.'\n      /usr/bin/screen -XS auction quit\n      echo 'Auction House has been Shutdown.'\n      sleep 30\n      cd \$FF_DIR/\n      /usr/bin/screen -dmS lobby \$FF_DIR/dsconnect\n      echo 'Lobby has Started.'\n      /usr/bin/screen -dmS game \$FF_DIR/dsgame\n      echo 'Game has Started.'\n      /usr/bin/screen -dmS search \$FF_DIR/dssearch\n      echo 'Search has Started.'\n      cd \$FF_DIR/auctionhouse/bin/\n      /usr/bin/screen -dmS auction \$FF_DIR/auctionhouse/bin/broker.py\n      echo 'Auction House has Started.'\n   ;;\n   *)\n      echo \"Usage: FFXI-Server {start|stop|restart}\" >&2\n      exit 3\n   ;;\nesac" > /etc/init.d/ffxi
-clear
-
 # ----------------------------------------------------------------
 Title "XI Server Installed"
-Text "Starting Server ..."
-/etc/init.d/ffxi start
-screen -ls
-Info "Server Started"
+sudo -H -u vagrant bash /dsxi/setup/server_start
 Info ""
 Info "You can access your server through the ip: 11.11.11.11"
 Info "After a computer restart, just do vagrant up again, do not provision (wipes server)"

@@ -4,66 +4,23 @@
 {% block body %}
 
 	{{ Macros.breadcrum([
-		[ 'Server', '/' ],
+		[ 'Server' ],
 	]) }}
 
-	<div class="page">
-		<form method="post">
+	<div class="panel">
+		<h2>Server Management</h2>
+		<div>
+			<a href="/server/settings" class="btn btn-primary">Settings</a>
+		</div>
+	</div>
 
-			<h1>Server</h1>
-			<p>
-				Here you can manage the <strong>server settings</strong>, this includes everything about how it is run and
-				what kind of features you would like to provide. Multiple settings can be created and saved to allow
-				flexibility in customizing your server.
-			</p>
-			<p>
-				Values not set will be set to the default based on the latest file. If any of the configuration files have changed since
-				this site was updated, saving will not be possible (work in progress)
-			</p>
-
-			<hr>
-
-			<div class="server-group">
-				<h2>Expansions</h2>
-				<p>Enable or disable specific expansions.</p>
-
-				<div class="checkbox-group">
-				{% for setting in settings.expansions %}
-					{{ Macros.server(setting) }}
-				{% endfor %}
-				</div>
-
-				<p>
-					Enable or Disable your chosen restrictions.
-					This generally results in a more accurate presentation of your selected expansions
-					as well as a less confusing player experience for things that are disabled
-					(things that are disabled are not loaded).
-				</p>
-
-				<div class="checkbox-group">
-				{% for setting in settings.expansions_global %}
-					{{ Macros.server(setting) }}
-				{% endfor %}
-				</div>
-			</div>
-
-			<div class="server-group">
-				<h2>Character</h2>
-				<p>Character specific settings</p>
-				{% for setting in settings.character %}
-					{{ Macros.server(setting) }}
-				{% endfor %}
-			</div>
-
-
-
-
-			<hr>
-
-			<button type="submit" class="btn btn-success btn-block btn-lg">Save Server Settings and Restart Server</button>
-
-
-		</form>
+	<div class="panel">
+		<h2>Server Controls</h2>
+		<div>
+			<a href="/server/settings" class="btn btn-success">Start</a>
+			<a href="/server/settings" class="btn btn-danger">Stop</a>
+			<a href="/server/settings" class="btn btn-info">Restart</a>
+		</div>
 	</div>
 
 {% endblock %}

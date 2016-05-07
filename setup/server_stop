@@ -1,0 +1,9 @@
+#!/bin/bash
+FF_DIR='/home/vagrant/ffxi'
+cd $FF_DIR/
+
+echo "Stopping Servers ..."
+/usr/bin/screen -XS lobby quit
+/usr/bin/screen -XS game quit
+/usr/bin/screen -XS search quit
+screen -ls

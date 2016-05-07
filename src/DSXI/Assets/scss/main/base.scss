@@ -100,7 +100,7 @@ main {
     left: 180px;
     width: calc(100% - 200px);
     padding: 30px 0;
-	max-width: 800px;
+	max-width: 920px;
 }
 
 thead th {
@@ -111,4 +111,15 @@ thead th {
 p {
 	line-height: 20px;
 	margin-bottom: 15px;
+}
+
+strong {
+	font-weight: 600;
+}
+
+fieldset {
+	label {
+		line-height: 32px;
+		display: block;
+	}
 }
