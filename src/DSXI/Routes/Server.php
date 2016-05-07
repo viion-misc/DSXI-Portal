@@ -73,6 +73,7 @@ trait Server
                 $storage->saveServerSettingsFile(ROOT .'/server/generated.server_message.conf', '/home/vagrant/ffxi/conf/server_message.conf', $welcomeMessage);
 
                 // Restart server
+                $this->get('session')->add('success', 'Settings have been saved and the server has been restarted.');
                 $this->get('server')->restart();
 
                 // get server settings again
@@ -99,7 +100,35 @@ trait Server
             $storage = new ServerStorage();
             $storage->saveServerSettingsFile($savefile, $data, true);
 
-            return $this->redirect('/server/settings');
+            $this->get('session')->add('success', 'Server settings have been recovered from the project repository source code. You will need to manually restart the server.');
+
+            return $this->redirect('/server');
+        });
+
+        //
+        // Server Actions
+        //
+        $this->route('/server/action/{action}', 'GET', function(Request $request, $action)
+        {
+            switch($action)
+            {
+                case 'start':
+                    $this->get('server')->start();
+                    $this->get('session')->add('success', 'Server has been started');
+                    break;
+
+                case 'stop':
+                    $this->get('server')->stop();
+                    $this->get('session')->add('success', 'Server has been stopped');
+                    break;
+
+                case 'restart':
+                    $this->get('server')->restart();
+                    $this->get('session')->add('success', 'Server has been restarted.');
+                    break;
+            }
+
+            return $this->redirect('/server');
         });
     }
 }

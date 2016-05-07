@@ -55,15 +55,11 @@ class ServerStorage extends \DSXI\Handle
 	//
 	// Save server settings file
 	//
-	public function saveServerSettingsFile($savefile, $gamefile, $data, $isRecovery = false)
+	public function saveServerSettingsFile($savefile, $gamefile, $data)
 	{
-		$response = $isRecovery
-			? 'Server settings have been recovered from the project repository source code.'
-			: 'Settings have been saved and the server has been restarted.';
-
 		// save settings
 		file_put_contents($savefile, $data);
 		shell_exec("sudo cp $savefile $gamefile");
-		$this->get('session')->add('success', $response);
+
 	}
 }

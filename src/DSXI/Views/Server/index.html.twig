@@ -10,16 +10,29 @@
 	<div class="panel">
 		<h2>Server Management</h2>
 		<div>
-			<a href="/server/settings" class="btn btn-primary">Settings</a>
+			<a href="/server/settings" class="btn btn-primary">Customize Settings</a>
 		</div>
 	</div>
 
 	<div class="panel">
 		<h2>Server Controls</h2>
 		<div>
-			<a href="/server/settings" class="btn btn-success">Start</a>
-			<a href="/server/settings" class="btn btn-danger">Stop</a>
-			<a href="/server/settings" class="btn btn-info">Restart</a>
+			<p>Restarting the server will take approximately {{ server_restart_delay }} seconds if they are logged in characters.
+				Please allow it time to restart properly!</p>
+			<a href="/server/action/start" class="btn btn-success">Start</a>
+			<a href="/server/action/stop" class="btn btn-danger">Stop</a>
+			<a href="/server/action/restart" class="btn btn-info">Restart</a>
+		</div>
+	</div>
+
+	<div class="panel panel-danger">
+		<h2>Recover Settings</h2>
+		<div>
+			<p>If you need to recover the settings, click "Recover" below, this will download the latest settings
+			file from GitHub and replace it over your saved settings. <strong>This does not change your saved settings
+			on the web portal, only behind the scenes.</strong></p>
+
+			<a href="/server/recover" class="btn btn-danger-outline">Recover Settings</a>
 		</div>
 	</div>
 
