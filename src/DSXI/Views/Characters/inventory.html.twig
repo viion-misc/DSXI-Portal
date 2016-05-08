@@ -1,0 +1,21 @@
+{% extends 'Default/base.html.twig' %}
+{% set page = 'characters' %}
+
+{% block body %}
+
+	{{ Macros.breadcrum([
+		[ 'Characters', '/characters' ],
+		[ 'Updating', '/characters/update/'~ character.id ~'/'~ character.name ],
+		[ 'Inventory Management' ]
+	]) }}
+
+	<div class="page">
+
+		<h1>Inventory Management: <strong>{{ character.name }}</strong></h1>
+
+		
+
+	</div>
+
+
+{% endblock %}
