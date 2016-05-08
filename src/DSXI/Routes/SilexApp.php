@@ -17,6 +17,7 @@ class SilexApp extends \DSXI\Handle
     use Home;
     use Account;
     use Server;
+    use Characters;
 
     // Silex Application!
     public $Silex;

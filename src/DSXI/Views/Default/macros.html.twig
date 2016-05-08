@@ -15,26 +15,52 @@
 
 {% macro server(setting, isCheckbox) %}
 {% set value = setting.set_value ? setting.set_value : setting.default_value %}
-<fieldset class="form-group server-field-row">
-    {% if isCheckbox %}
-        <input type="checkbox" class="form-control" id="{{ setting.variable }}" name="{{ setting.variable }}" {% if value %}checked="checked"{% endif %}>
-        <label for="{{ setting.variable }}">{{ setting.name }}</label>
-    {% else %}
+    <fieldset class="form-group server-field-row">
+        {% if isCheckbox %}
+            <input type="checkbox" class="form-control" id="{{ setting.variable }}" name="{{ setting.variable }}" {% if value %}checked="checked"{% endif %}>
+            <label for="{{ setting.variable }}">{{ setting.name }}</label>
+        {% else %}
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="{{ setting.variable }}">{{ setting.name }}</label>
+                </div>
+                <div class="col-md-8">
+                    {% if setting.type == 'text' or setting.type == 'checkbox' %}
+                        <input type="{{ setting.type }}" class="form-control" id="{{ setting.variable }}" name="{{ setting.variable }}" {% if setting.type == 'checkbox' %}{% if value %}checked="checked"{% endif %}{% else %}value="{{ value }}"{% endif %}>
+                    {% elseif setting.type == 'textarea' %}
+                        <textarea class="form-control" id="{{ setting.variable }}" name="{{ setting.variable }}" rows="{{ value ? value|split("\n")|length + 1 : 3 }}">{{ value }}</textarea>
+                    {% endif %}
+                    {% if setting.help is defined and setting.help is not empty %}
+                        <small>{{ setting.help|nl2br }}</small>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    </fieldset>
+{% endmacro %}
+
+{% macro form(id, name, value, type, options, help) %}
+    <fieldset class="form-group character-field-row">
         <div class="row">
             <div class="col-md-4">
-                <label for="{{ setting.variable }}">{{ setting.name }}</label>
+                <label for="{{ id }}">{{ name }}</label>
             </div>
             <div class="col-md-8">
-                {% if setting.type == 'text' or setting.type == 'checkbox' %}
-                    <input type="{{ setting.type }}" class="form-control" id="{{ setting.variable }}" name="{{ setting.variable }}" {% if setting.type == 'checkbox' %}{% if value %}checked="checked"{% endif %}{% else %}value="{{ value }}"{% endif %}>
-                {% elseif setting.type == 'textarea' %}
-                    <textarea class="form-control" id="{{ setting.variable }}" name="{{ setting.variable }}" rows="{{ value ? value|split("\n")|length + 1 : 3 }}">{{ value }}</textarea>
+                {% if type == 'select' %}
+                    <select  class="form-control" id="{{ id }}" name="{{ id }}">
+                    {% for id, name in options %}
+                        <option value="{{ id }}" {% if id == value %}selected{% endif %}>{{ name }}</option>
+                    {% endfor %}
+                    </select>
+                {% else %}
+                    <input type="text" class="form-control" id="{{ id }}" name="{{ id }}" value="{{ value }}">
                 {% endif %}
-                {% if setting.help is defined and setting.help is not empty %}
+
+                {# Help text #}
+                {% if help is defined and help is not empty %}
                     <small>{{ setting.help|nl2br }}</small>
                 {% endif %}
             </div>
         </div>
-    {% endif %}
-</fieldset>
+    </fieldset>
 {% endmacro %}

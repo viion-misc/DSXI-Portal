@@ -5,7 +5,7 @@ namespace DSXI\Apps\Account;
 use DSXI\Storage\UserStorage;
 
 //
-// Account wrapper
+// User wrapper
 //
 class User extends \DSXI\Handle
 {
@@ -45,7 +45,7 @@ class User extends \DSXI\Handle
 				$this->level = $user['level'];
 
 				foreach($user['characters'] as $chardata) {
-					$this->characters[] = new Character($chardata);
+					$this->characters[] = $chardata;
 				}
 			}
 		}

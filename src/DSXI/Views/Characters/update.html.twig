@@ -1,0 +1,46 @@
+{% extends 'Default/base.html.twig' %}
+{% set page = 'characters' %}
+
+{% block body %}
+
+	{{ Macros.breadcrum([
+		[ 'Characters', '/characters' ],
+		[ 'Updating' ],
+	]) }}
+
+	<div class="page">
+
+		<h1>Updating: <strong>{{ character.name }}</strong></h1>
+
+		<p>After saving, the character must either re-log or zone for changes to effect. (Relogging is the most reliable method)</p>
+
+		<form method="post" class="character-settings-form">
+			<div class="panel">
+				<h2>Profile</h2>
+				<div>
+					{{ Macros.form('charname', 'Name', character.name, 'text') }}
+					{{ Macros.form('gmlevel', 'GM Level', character.gmlevel, 'select', {
+						0: '(0) None',
+						1: '(1) GM',
+						2: '(2) Senior GM',
+						3: '(3) Lead GM',
+						4: '(4) Producer GM',
+						5: '(5) Admin GM'
+					}) }}
+
+				<button type="submit" class="btn btn-success">Save</button>
+				</div>
+			</div>
+		</form>
+
+		<div class="panel">
+			<h2>Actions</h2>
+			<div>
+				<a href="/characters/update/{{ character.id }}/{{ character.name }}/inventory" class="btn btn-primary">Inventory Management</a>
+			</div>
+		</div>
+
+	</div>
+
+
+{% endblock %}

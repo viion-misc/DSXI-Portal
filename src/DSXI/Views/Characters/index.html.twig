@@ -4,7 +4,7 @@
 {% block body %}
 
 	{{ Macros.breadcrum([
-		[ 'Characters', '/characters' ],
+		[ 'Characters' ],
 	]) }}
 
 	<div class="page">
@@ -26,7 +26,7 @@
 					<tr>
 						<th scope="row">{{ character.id }}</th>
 						<td><a href="/characters/update/{{ character.id }}/{{ character.name }}">{{ character.name }}</a></td>
-						<td>-</td>
+						<td>{{ character.mainLevel }} {{ character.main }} {% if character.sub > 0 %}/ {{ character.sub }} {{ character.subJob }}{% endif %}</td>
 						<td>{{ character.playtime.days }} days, {{ character.playtime.hours }} hours, {{ character.playtime.minutes }} minutes</td>
 					</tr>
 					{% endfor %}
@@ -38,7 +38,38 @@
 		</div>
 		{% endif %}
 
-	</div
+		<hr>
+
+		<h1>Other Characters</h1>
+
+		{% if characters %}
+			<table class="table">
+				<thead>
+					<tr>
+						<th width="5%">ID</th>
+						<th width="30%">Name</th>
+						<th width="20%">Job/Class</th>
+						<th width="45%">Playtime</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for character in characters %}
+					<tr>
+						<th scope="row">{{ character.id }}</th>
+						<td><a href="/characters/update/{{ character.id }}/{{ character.name }}">{{ character.name }}</a></td>
+						<td>{{ character.mainLevel }} {{ character.main }} {% if character.sub > 0 %}/ {{ character.sub }} {{ character.subJob }}{% endif %}</td>
+						<td>{{ character.playtime.days }} days, {{ character.playtime.hours }} hours, {{ character.playtime.minutes }} minutes</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+		<div class="alert alert-warning">
+			No other characters, lonely server :(
+		</div>
+		{% endif %}
+
+	</div>
 
 
 {% endblock %}

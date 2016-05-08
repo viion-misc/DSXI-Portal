@@ -2,8 +2,10 @@
 
 namespace DSXI\Apps\Account;
 
+use DSXI\Storage\CharacterStorage;
+
 //
-// Account wrapper
+// Character wrapper
 //
 class Character extends \DSXI\Handle
 {
@@ -21,8 +23,17 @@ class Character extends \DSXI\Handle
 	public $campaign;
 	public $playtime;
 
+	public $hp;
+	public $mp;
+	public $mainJob;
+	public $subJob;
+	public $mainLevel;
+	public $subLevel;
+
 	function __construct($character)
 	{
+		$storage = new CharacterStorage();
+
 		$this->id = $character['charid'];
 		$this->name = $character['charname'];
 		$this->nation = $character['nation'];
@@ -51,5 +62,15 @@ class Character extends \DSXI\Handle
 			'minutes' => $playtime->format('i'),
 			'seconds' => $playtime->format('s'),
 		];
+
+		$this->hp = $character['stats_hp'];
+		$this->mp = $character['stats_mp'];
+		$this->mainJob = $character['stats_mjob'];
+		$this->subJob = $character['stats_mjob'];
+		$this->mainLevel = $character['stats_mlvl'];
+		$this->subLevel = $character['stats_slvl'];
+
+		$this->main = $storage->joblist[$this->mainJob];
+		$this->sub = $this->subJob > 0 ? $storage->joblist[$this->subJob] : null;
 	}
 }

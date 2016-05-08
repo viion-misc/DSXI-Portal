@@ -17,15 +17,5 @@ trait Home
 
             return $this->respond('Home/index.html.twig');
         });
-
-        //
-        // Home!
-        //
-        $this->route('/characters', 'GET', function(Request $request)
-        {
-            $this->mustBeOnline();
-
-            return $this->respond('Characters/index.html.twig');
-        });
     }
 }

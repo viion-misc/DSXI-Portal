@@ -2,6 +2,8 @@
 
 namespace DSXI\Storage;
 
+use DSXI\Apps\Account\Character;
+
 //
 // Character Storage
 //
@@ -95,6 +97,26 @@ class CharacterStorage extends \DSXI\Handle
 	}
 
 	//
+	// Get all characters that are not tied to the user
+	//
+	public function getCharacterById($id)
+	{
+		$sql = sprintf('SELECT %s FROM chars
+			LEFT JOIN char_stats ON char_stats.charid = chars.charid
+			WHERE chars.charid = :charid', implode(',', $this->columns));
+
+		$result = $this->dbs->sql($sql, [
+			':charid' => $id,
+		]);
+
+		if (!$result) {
+			return die('Could not find character for ID: '. $id);
+		}
+
+		return new Character($result[0]);
+	}
+
+	//
 	// Get characters for user
 	//
 	public function getCharactersByUserId($accId)
@@ -103,9 +125,19 @@ class CharacterStorage extends \DSXI\Handle
 			LEFT JOIN char_stats ON char_stats.charid = chars.charid
 			WHERE chars.accid = :accid', implode(',', $this->columns));
 
-		return $this->dbs->sql($sql, [
+		$characters = $this->dbs->sql($sql, [
 			':accid' => $accId,
 		]);
+
+		if (!$characters) {
+			return false;
+		}
+
+		foreach($characters as $i => $character) {
+			$characters[$i] = new Character($character);
+		}
+
+		return $characters;
 	}
 
 	//
@@ -117,8 +149,38 @@ class CharacterStorage extends \DSXI\Handle
 			LEFT JOIN char_stats ON char_stats.charid = chars.charid
 			WHERE chars.accid != :accid', implode(',', $this->columns));
 
-		return $this->dbs->sql($sql, [
+		$characters = $this->dbs->sql($sql, [
 			':accid' => $accId,
 		]);
+
+		if (!$characters) {
+			return false;
+		}
+
+		foreach($characters as $i => $character) {
+			$characters[$i] = new Character($character);
+		}
+
+		return $characters;
+	}
+
+	//
+	// Update some character profile data
+	//
+	public function updateCharacterProfile($charId, $data)
+	{
+		$update = [];
+		$binds = [
+			':id' => $charId,
+		];
+
+		foreach($data as $column => $value) {
+			$rand = ':bind'. mt_rand(0,9999);
+			$update[] = sprintf('%s = %s', $column, $rand);
+			$binds[$rand] = trim($value);
+		}
+
+		$sql = sprintf('UPDATE chars SET %s WHERE charid = :id', implode(', ', $update));
+		$this->dbs->sql($sql, $binds);
 	}
 }
