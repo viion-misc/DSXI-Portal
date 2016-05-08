@@ -19,7 +19,7 @@ class InventoryStorage extends \DSXI\Handle
 	//
 	// Get inventory for a specific character
 	//
-	public function getInventoryByCharId()
+	public function getInventoryByCharId($id)
 	{
 		$sql = sprintf('SELECT * FROM char_inventory
 			WHERE char_inventory.charid = :charid');
@@ -29,6 +29,8 @@ class InventoryStorage extends \DSXI\Handle
 		]);
 
 		foreach($inventory as $i => $item) {
+			show($item);
+			die;
 			$inventory[$i] = new Item($item);
 		}
 

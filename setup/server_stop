@@ -6,4 +6,5 @@ echo "Stopping Servers ..."
 /usr/bin/screen -XS lobby quit
 /usr/bin/screen -XS game quit
 /usr/bin/screen -XS search quit
+sleep 1
 screen -ls

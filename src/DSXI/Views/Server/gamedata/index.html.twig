@@ -1,0 +1,22 @@
+{% extends 'Default/base.html.twig' %}
+{% set page = 'server' %}
+
+{% block body %}
+
+	{{ Macros.breadcrum([
+		[ 'Server', '/server' ],
+		[ 'Import Game Data' ],
+	]) }}
+
+	<div class="page">
+
+		<h1>Import Game Data</h1>
+
+		<p>This site requires the game database to be imported. Click below to do this, it will read XML files from /data folder.</p>
+		<p>Import can take a few seconds!</p>
+
+		<a href="/server/gamedata/process" class="btn btn-success-outline">Process Import</a>
+
+	</div>
+
+{% endblock %}

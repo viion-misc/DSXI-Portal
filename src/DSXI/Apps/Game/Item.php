@@ -8,13 +8,19 @@ namespace DSXI\Apps\Game;
 class Item extends \DSXI\Handle
 {
 	public $id;
-	public $name;
-	public $nation;
+	public $quantity;
+	public $location;
+	public $slot;
 
-	function __construct($character)
+	function __construct($item)
 	{
-		$this->id = $character['charid'];
-		$this->name = $character['charname'];
+		$this->id = $item['itemId'];
+		$this->quantity = $item['quantity'];
+		$this->location = $item['location'];
+		$this->slot = $item['slot'];
+
+
+		$this->name = 'dunno';
 
 	}
 }

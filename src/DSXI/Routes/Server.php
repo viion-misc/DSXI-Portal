@@ -130,5 +130,48 @@ trait Server
 
             return $this->redirect('/server');
         });
+
+        //
+        // Server game data
+        //
+        $this->route('/server/gamedata', 'GET', function(Request $request)
+        {
+            return $this->respond('Server/gamedata/index.html.twig');
+        });
+
+        //
+        // Server game data process
+        //
+        $this->route('/server/gamedata/process', 'GET', function(Request $request)
+        {
+            $storage = new ServerStorage();
+
+            $folder = ROOT .'/data/';
+            $files = array_diff(scandir($folder), ['..', '.']);
+
+            foreach($files as $file)
+            {
+                $xml = simplexml_load_file($folder . $file);
+                $data = json_decode(json_encode((array) $xml), 1);
+
+                foreach($data['thing'] as $i => $item)
+                {
+                    $name = $item['field'][6];
+
+                    show($name);
+                }
+
+                die;
+            }
+
+
+            show($files);
+
+
+
+            die;
+            $this->get('session')->add('success', 'Game data has been imported');
+            return $this->redirect('/server/gamedata');
+        });
     }
 }

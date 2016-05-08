@@ -39,8 +39,8 @@ class ServerStorage extends \DSXI\Handle
 		foreach($settings as $variable => $value)
 		{
 			// moar dirty code...
-			$rand1 = mt_rand(0,999999999);
-			$rand2 = mt_rand(0,999999999);
+			$rand1 = mt_rand(0,9999);
+			$rand2 = mt_rand(0,9999);
 
 			$values[] = sprintf("(:r%s, :r%s)", $rand1, $rand2);
 			$binds[sprintf(':r%s', $rand1)] = $variable;
