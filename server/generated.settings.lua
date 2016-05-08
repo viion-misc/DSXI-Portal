@@ -40,17 +40,17 @@ ENABLE_ROV     = 1;
 RESTRICT_BY_EXPANSION = 0;
 
 -- CHARACTER CONFIG
-INITIAL_LEVEL_CAP = 50; -- The initial level cap for new players.  There seems to be a hardcap of 255.
+INITIAL_LEVEL_CAP = 75; -- The initial level cap for new players.  There seems to be a hardcap of 255.
 MAX_LEVEL = 75; -- Level max of the server, lowers the attainable cap by disabling Limit Break quests.
 NORMAL_MOB_MAX_LEVEL_RANGE_MIN = 81; -- Lower Bound of Max Level Range for Normal Mobs (0 = Uncapped)
 NORMAL_MOB_MAX_LEVEL_RANGE_MAX = 84; -- Upper Bound of Max Level Range for Normal Mobs (0 = Uncapped)
 START_GIL = 1000000; --Amount of gil given to newly created characters.
-START_INVENTORY = 30; -- Starting inventory and satchel size.  Ignores values < 30.  Do not set above 80!
+START_INVENTORY = 80; -- Starting inventory and satchel size.  Ignores values < 30.  Do not set above 80!
 OPENING_CUTSCENE_ENABLE = 0; --Set to 1 to enable opening cutscenes, 0 to disable.
 SUBJOB_QUEST_LEVEL = 18; -- Minimum level to accept either subjob quest.  Set to 0 to start the game with subjobs unlocked.
 ADVANCED_JOB_LEVEL = 30; -- Minimum level to accept advanced job quests.  Set to 0 to start the game with advanced jobs.
-ALL_MAPS = 0; -- Set to 1 to give starting characters all the maps.
-UNLOCK_OUTPOST_WARPS = 0; -- Set to 1 to give starting characters all outpost warps.  2 to add Tu'Lia and Tavnazia.
+ALL_MAPS = 1; -- Set to 1 to give starting characters all the maps.
+UNLOCK_OUTPOST_WARPS = 1; -- Set to 1 to give starting characters all outpost warps.  2 to add Tu'Lia and Tavnazia.
 
 SHOP_PRICE      = 1.000; -- Multiplies prices in NPC shops.
 GIL_RATE        = 1.000; -- Multiplies gil earned from quests.  Won't always display in game.
@@ -78,15 +78,15 @@ MINING_RATE             = 50; -- % chance to recieve an item from mining.  Set b
 
 -- SE implemented coffer/chest illusion time in order to prevent coffer farming. No-one in the same area can open a chest or coffer for loot (gil, gems & items)
 -- till a random time between MIN_ILLSION_TIME and MAX_ILLUSION_TIME. During this time players can loot keyitem and item related to quests (AF, maps... etc.)
-COFFER_MAX_ILLUSION_TIME = 3600;  -- 1 hour
-COFFER_MIN_ILLUSION_TIME = 1800;  -- 30 minutes
-CHEST_MAX_ILLUSION_TIME  = 3600;  -- 1 hour
-CHEST_MIN_ILLUSION_TIME  = 1800;  -- 30 minutes
+COFFER_MAX_ILLUSION_TIME = 1800;  -- 1 hour
+COFFER_MIN_ILLUSION_TIME = 900;  -- 30 minutes
+CHEST_MAX_ILLUSION_TIME  = 1800;  -- 1 hour
+CHEST_MIN_ILLUSION_TIME  = 900;  -- 30 minutes
 
 -- Sets spawn type for: Behemoth, Fafnir, Adamantoise, King Behemoth, Nidhog, Aspidochelone.
 -- Use 0 for timed spawns, 1 for force pop only, 2 for both
-LandKingSystem_NQ = 0;
-LandKingSystem_HQ = 0;
+LandKingSystem_NQ = 2;
+LandKingSystem_HQ = 2;
 
 -- DYNAMIS SETTINGS
     BETWEEN_2DYNA_WAIT_TIME = 1;        -- wait time between 2 Dynamis (in real day) min: 1 day
@@ -128,15 +128,15 @@ DIA_OVERWRITE = 1; --Set to 1 to allow Bio to overwrite same tier Dia.  Default 
 BIO_OVERWRITE = 0; --Set to 1 to allow Dia to overwrite same tier Bio.  Default is 0.
 BARELEMENT_OVERWRITE = 1; --Set to 1 to allow Barelement spells to overwrite each other (prevent stacking).  Default is 1.
 BARSTATUS_OVERWRITE = 1; --Set to 1 to allow Barstatus spells to overwrite each other (prevent stacking).  Default is 1.
-STONESKIN_CAP = 350; -- soft cap for hp absorbed by stoneskin
-BLINK_SHADOWS = 2;   -- number of shadows supplied by Blink spell
-ENSPELL_DURATION = 180; -- duration of RDM en-spells
-SPIKE_EFFECT_DURATION = 180; -- the duration of RDM, BLM spikes effects (not Reprisal)
-ELEMENTAL_DEBUFF_DURATION = 120; -- base duration of elemental debuffs
-AQUAVEIL_COUNTER = 1;  -- Base amount of hits Aquaveil absorbs to prevent spell interrupts. Retail is 1.
+STONESKIN_CAP = 1000; -- soft cap for hp absorbed by stoneskin
+BLINK_SHADOWS = 4;   -- number of shadows supplied by Blink spell
+ENSPELL_DURATION = 600; -- duration of RDM en-spells
+SPIKE_EFFECT_DURATION = 600; -- the duration of RDM, BLM spikes effects (not Reprisal)
+ELEMENTAL_DEBUFF_DURATION = 300; -- base duration of elemental debuffs
+AQUAVEIL_COUNTER = 2;  -- Base amount of hits Aquaveil absorbs to prevent spell interrupts. Retail is 1.
 ABSORB_SPELL_AMOUNT = 8; -- how much of a stat gets absorbed by DRK absorb spells - expected to be a multiple of 8.
 ABSORB_SPELL_TICK = 9; -- duration of 1 absorb spell tick
-SNEAK_INVIS_DURATION_MULTIPLIER = 1; -- multiplies duration of sneak,invis,deodorize to reduce player torture. 1 = retail behavior.
+SNEAK_INVIS_DURATION_MULTIPLIER = 5; -- multiplies duration of sneak,invis,deodorize to reduce player torture. 1 = retail behavior.
 USE_OLD_CURE_FORMULA = 0; -- true/false. if true, uses older cure formula (3*MND + VIT + 3*(healing skill/5)) // cure 6 will use the newer formula
 
 -- CELEBRATIONS
@@ -154,23 +154,23 @@ HALLOWEEN_2005 = 0; -- Set to 1 to Enable the 2005 version of Harvest Festival, 
 HALLOWEEN_YEAR_ROUND = 0; -- Set to 1 to have Harvest Festival initialize outside of normal times.
 
 -- MISC
-HOMEPOINT_HEAL = 0; --Set to 1 if you want Home Points to heal you like in single-player Final Fantasy games.
+HOMEPOINT_HEAL = 1; --Set to 1 if you want Home Points to heal you like in single-player Final Fantasy games.
 RIVERNE_PORTERS = 120; -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.
 LANTERNS_STAY_LIT = 1200; -- time in seconds that lanterns in the Den of Rancor stay lit.
 ENABLE_COP_ZONE_CAP = 1; -- enable or disable lvl cap
 TIMEZONE_OFFSET = 9.0; -- Offset from UTC used to determine when "JP Midnight" is for the server.  Default is JST (+9.0).
-ALLOW_MULTIPLE_EXP_RINGS = 0; -- Set to 1 to remove ownership restrictions on the Chariot/Empress/Emperor Band trio.
-BYPASS_EXP_RING_ONE_PER_WEEK = 0; -- -- Set to 1 to bypass the limit of one ring per Conquest Tally Week.
-NUMBER_OF_DM_EARRINGS = 1; -- Number of earrings players can simultaneously own from Divine Might before scripts start blocking them (Default: 1)
-HOMEPOINT_TELEPORT = 0; -- Enables the homepoint teleport system
+ALLOW_MULTIPLE_EXP_RINGS = 1; -- Set to 1 to remove ownership restrictions on the Chariot/Empress/Emperor Band trio.
+BYPASS_EXP_RING_ONE_PER_WEEK = 1; -- -- Set to 1 to bypass the limit of one ring per Conquest Tally Week.
+NUMBER_OF_DM_EARRINGS = 10; -- Number of earrings players can simultaneously own from Divine Might before scripts start blocking them (Default: 1)
+HOMEPOINT_TELEPORT = 1; -- Enables the homepoint teleport system
 DIG_ABUNDANCE_BONUS = 0; -- Increase chance of digging up an item (450  = item digup chance +45)
 DIG_FATIGUE = 1; -- Set to 0 to disable Dig Fatigue
-MIASMA_FILTER_COOLDOWN = 5;  -- Number of days a player can obtain a Miasma Filter KI for any of the Boneyard Gully ENMs (Minimum:1)
+MIASMA_FILTER_COOLDOWN = 1;  -- Number of days a player can obtain a Miasma Filter KI for any of the Boneyard Gully ENMs (Minimum:1)
 FORCE_SPAWN_QM_RESET_TIME = 300; -- Number of seconds the ??? remains hidden for after the despawning of the mob it force spawns.
 
 -- LIMBUS
 BETWEEN_2COSMOCLEANSE_WAIT_TIME = 1; -- day between 2 limbus keyitem  (default 3 days)
-DIMENSIONAL_PORTAL_UNLOCK = 0; -- Set true to bypass requirements for using dimensional portals to reach sea for Limbus
+DIMENSIONAL_PORTAL_UNLOCK = 1; -- Set true to bypass requirements for using dimensional portals to reach sea for Limbus
 
 -- ABYSSEA
 VISITANT_BONUS = 1.00; -- Default: 1.00 - (retail) - Multiplies the base time value of each Traverser Stone.
