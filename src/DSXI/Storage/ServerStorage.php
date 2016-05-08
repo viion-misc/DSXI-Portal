@@ -20,7 +20,7 @@ class ServerStorage extends \DSXI\Handle
 	public function getServerSettings()
 	{
 		$array = [];
-		$settings = $this->dbs->sql('SELECT * FROM portal_server_settings ORDER BY id ASC');
+		$settings = $this->dbs->sql('SELECT * FROM portal_server_settings ORDER BY category ASC, name ASC');
 		foreach($settings as $option) {
 			$array[$option['category']][] = $option;
 		}
