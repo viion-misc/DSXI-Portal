@@ -34,10 +34,20 @@
 			</div>
 
 			<div class="server-group">
-				<h2><i class="fa fa-plus" aria-hidden="true"></i> Messages</h2>
+				<h2><i class="fa fa-plus" aria-hidden="true"></i> Server Data</h2>
 				<div>
-					<p>Set common messages that appear in-game.</p>
-					{% for setting in settings.messages %}
+					<p>Set common data that appears in-game.</p>
+					{% for setting in settings.server %}
+						{{ Macros.server(setting) }}
+					{% endfor %}
+				</div>
+			</div>
+
+			<div class="server-group">
+				<h2><i class="fa fa-plus" aria-hidden="true"></i> Important</h2>
+				<div>
+					<p>These are various settings that are considered important as they're commonly modified by server admins.</p>
+					{% for setting in settings.important %}
 						{{ Macros.server(setting) }}
 					{% endfor %}
 				</div>
@@ -67,143 +77,38 @@
 				</div>
 			</div>
 
-			<div class="server-group">
-				<h2><i class="fa fa-plus" aria-hidden="true"></i> Maps</h2>
-				<div>
-					<p>Change settings related to the game environment</p>
-					{% for setting in settings.map %}
-						{{ Macros.server(setting) }}
-					{% endfor %}
-				</div>
-			</div>
+			<hr>
 
-			<div class="server-group">
-				<h2><i class="fa fa-plus" aria-hidden="true"></i> Character</h2>
-				<div>
-					<p>Character specific settings</p>
-					{% for setting in settings.character %}
-						{{ Macros.server(setting) }}
-					{% endfor %}
-				</div>
-			</div>
+			{# Some notes #}
+			{% set notes = {
+				'coffers': 'SE implemented coffer/chest illusion time in order to
+					prevent coffer farming. No-one in the same area can open
+					a chest or coffer for loot (gil, gems & items) till a
+					random time between min and max.
+					During this time players can loot keyitem and item related
+					to quests (AF, maps... etc.)',
 
-			<div class="server-group">
-				<h2><i class="fa fa-plus" aria-hidden="true"></i> Misc</h2>
-				<div>
-					<p>Various different settings</p>
-					{% for setting in settings.misc %}
-						{{ Macros.server(setting) }}
-					{% endfor %}
-				</div>
-			</div>
+				'hnm': 'Sets spawn type for: Behemoth, Fafnir, Adamantoise,
+					King Behemoth, Nidhog, Aspidochelone. Use 0 for timed spawns,
+					1 for force pop only, 2 for both',
+			} %}
 
-			<div class="server-group">
-				<h2><i class="fa fa-plus" aria-hidden="true"></i> Skills</h2>
-				<div>
-					<p>Adjust how some skills work</p>
-					{% for setting in settings.skills %}
-						{{ Macros.server(setting) }}
-					{% endfor %}
-				</div>
-			</div>
+			{% set ignore = ['server', 'expansions', 'important', 'expansions_global'] %}
+			{% for group, list in settings if group not in ignore %}
 
-			<div class="server-group">
-				<h2><i class="fa fa-plus" aria-hidden="true"></i> Rates</h2>
-				<div>
-					<p>Tweak progress rates</p>
-					{% for setting in settings.rates %}
-						{{ Macros.server(setting) }}
-					{% endfor %}
+				<div class="server-group">
+					<h2><i class="fa fa-plus" aria-hidden="true"></i> {{ group|title }}</h2>
+					<div>
+						{% if notes[group] is defined %}
+							<p>{{ notes[group] }}</p>
+						{% endif %}
+						{% for setting in list  %}
+							{{ Macros.server(setting) }}
+						{% endfor %}
+					</div>
 				</div>
-			</div>
 
-			<div class="server-group">
-				<h2><i class="fa fa-plus" aria-hidden="true"></i> HNM</h2>
-				<div>
-					<p>Sets spawn type for: Behemoth, Fafnir, Adamantoise,
-						King Behemoth, Nidhog, Aspidochelone. Use 0 for timed spawns,
-						1 for force pop only, 2 for both</p>
-					{% for setting in settings.hnm %}
-						{{ Macros.server(setting) }}
-					{% endfor %}
-				</div>
-			</div>
-
-			<div class="server-group">
-				<h2><i class="fa fa-plus" aria-hidden="true"></i> Dynamis</h2>
-				<div>
-					<p>Handle Dynamis requirements</p>
-					{% for setting in settings.dynamis %}
-						{{ Macros.server(setting) }}
-					{% endfor %}
-				</div>
-			</div>
-
-			<div class="server-group">
-				<h2><i class="fa fa-plus" aria-hidden="true"></i> Limbus</h2>
-				<div>
-					<p>Handle Limbus requirementss</p>
-					{% for setting in settings.limbus %}
-						{{ Macros.server(setting) }}
-					{% endfor %}
-				</div>
-			</div>
-
-			<div class="server-group">
-				<h2><i class="fa fa-plus" aria-hidden="true"></i> Abyssea</h2>
-				<div>
-					<p>Abyssea settings</p>
-					{% for setting in settings.abyssea %}
-						{{ Macros.server(setting) }}
-					{% endfor %}
-				</div>
-			</div>
-
-			<div class="server-group">
-				<h2><i class="fa fa-plus" aria-hidden="true"></i> Gathering</h2>
-				<div>
-					<p>Tweak gathering chances</p>
-					{% for setting in settings.gathering %}
-						{{ Macros.server(setting) }}
-					{% endfor %}
-				</div>
-			</div>
-
-			<div class="server-group">
-				<h2><i class="fa fa-plus" aria-hidden="true"></i> Coffers</h2>
-				<div>
-					<p>SE implemented coffer/chest illusion time in order to
-						prevent coffer farming. No-one in the same area can open
-						a chest or coffer for loot (gil, gems & items) till a
-						random time between min and max.
-						During this time players can loot keyitem and item related
-						to quests (AF, maps... etc.)</p>
-					{% for setting in settings.coffers %}
-						{{ Macros.server(setting) }}
-					{% endfor %}
-				</div>
-			</div>
-
-
-			<div class="server-group">
-				<h2><i class="fa fa-plus" aria-hidden="true"></i> Events</h2>
-				<div>
-					<p>Manage In-Game events</p>
-					{% for setting in settings.events %}
-						{{ Macros.server(setting) }}
-					{% endfor %}
-				</div>
-			</div>
-
-			<div class="server-group">
-				<h2><i class="fa fa-plus" aria-hidden="true"></i> Database</h2>
-				<div>
-					<p>Change the games database details</p>
-					{% for setting in settings.database %}
-						{{ Macros.server(setting) }}
-					{% endfor %}
-				</div>
-			</div>
+			{% endfor %}
 
 			<button type="submit" class="btn btn-success btn-block btn-lg">Save Server Settings and Restart Server</button>
 
