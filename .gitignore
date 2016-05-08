@@ -4,3 +4,4 @@
 /app/settings.php.dist
 /pma/
 /.sass-cache/
+/data/
