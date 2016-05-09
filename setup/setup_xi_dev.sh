@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-cd /dsxi/setup
-source /dsxi/setup/colors.sh
+cd ~/web/setup/
+source colors.sh
 
 #------------------------------------------------------
 # FFXI Dark Star Private Server

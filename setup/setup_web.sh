@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-cd /dsxi/setup
-source /dsxi/setup/colors.sh
+cd ~/web/setup/
+source colors.sh
 
 # Start
 Heading "++ Setting up DSXI ++"
@@ -69,8 +69,8 @@ fi
 # - - - - - - - - - - - - - - - - - -
 Text "Copying NGINX host"
 sudo rm /etc/nginx/sites-available/default
-sudo cp /dsxi/setup/nginx/default /etc/nginx/sites-available/default
-sudo cp /dsxi/setup/nginx/nginx.conf /etc/nginx/nginx.conf
+sudo cp ~/web/setup/nginx/default /etc/nginx/sites-available/default
+sudo cp ~/web/setup/nginx/nginx.conf /etc/nginx/nginx.conf
 sudo service nginx restart
 
 # - - - - - - - - - - - - - - - - - -
