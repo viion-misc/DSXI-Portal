@@ -175,7 +175,7 @@ class CharacterStorage extends \DSXI\Handle
 		];
 
 		foreach($data as $column => $value) {
-			$rand = ':bind'. mt_rand(0,9999);
+			$rand = ':bind'. mt_rand(0,99999999);
 			$update[] = sprintf('%s = %s', $column, $rand);
 			$binds[$rand] = trim($value);
 		}
