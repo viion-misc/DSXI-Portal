@@ -67,10 +67,10 @@ trait Server
                 $welcomeMessage = str_ireplace(array_keys($findAndReplace), $findAndReplace, file_get_contents(ROOT .'/server/template.server_message.conf'));
 
                 // Store all the settings
-                $storage->saveServerSettingsFile(ROOT .'/server/generated.settings.lua', '/home/vagrant/ffxi/scripts/globals/settings.lua', $settingsLua);
-                $storage->saveServerSettingsFile(ROOT .'/server/generated.login_darkstar.conf', '/home/vagrant/ffxi/conf/login_darkstar.conf', $loginDarkstar);
-                $storage->saveServerSettingsFile(ROOT .'/server/generated.map_darkstar.conf', '/home/vagrant/ffxi/conf/map_darkstar.conf', $mapDarkstar);
-                $storage->saveServerSettingsFile(ROOT .'/server/generated.server_message.conf', '/home/vagrant/ffxi/conf/server_message.conf', $welcomeMessage);
+                $storage->saveServerSettingsFile(ROOT .'/server/generated.settings.lua', '/home/'. SERVER_USER .'/ffxi/scripts/globals/settings.lua', $settingsLua);
+                $storage->saveServerSettingsFile(ROOT .'/server/generated.login_darkstar.conf', '/home/'. SERVER_USER .'/ffxi/conf/login_darkstar.conf', $loginDarkstar);
+                $storage->saveServerSettingsFile(ROOT .'/server/generated.map_darkstar.conf', '/home/'. SERVER_USER .'/ffxi/conf/map_darkstar.conf', $mapDarkstar);
+                $storage->saveServerSettingsFile(ROOT .'/server/generated.server_message.conf', '/home/'. SERVER_USER .'/ffxi/conf/server_message.conf', $welcomeMessage);
 
                 // Restart server
                 $this->get('session')->add('success', 'Settings have been saved and the server has been restarted.');
