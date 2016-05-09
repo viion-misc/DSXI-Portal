@@ -7,4 +7,5 @@ echo "Stopping Servers ..."
 /usr/bin/screen -XS game quit
 /usr/bin/screen -XS search quit
 sleep 1
+pkill screen
 screen -ls
