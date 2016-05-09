@@ -10,6 +10,7 @@ return [
     // Adjust the delay (seconds) for starting/stopping the server.
     // Do not set this below 30 seconds or you will have issues!
     'server_restart_delay' => 60,
+    'server_user' => 'vagrant',
 
     // Site settings
     'silex_debug' => true,

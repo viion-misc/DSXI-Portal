@@ -9,7 +9,7 @@ class Server
 	//
 	public function start()
 	{
-		shell_exec("sudo -H -u vagrant bash /dsxi/setup/server_start");
+		shell_exec("sudo -H -u ". SERVER_USER ." bash ~/web/setup/server_start");
 	}
 
 	//
@@ -17,7 +17,7 @@ class Server
 	//
 	public function stop()
 	{
-		shell_exec("sudo -H -u vagrant bash /dsxi/setup/server_stop");
+		shell_exec("sudo -H -u ". SERVER_USER ." bash ~/web/setup/server_stop");
 	}
 
 	//
