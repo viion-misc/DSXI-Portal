@@ -130,7 +130,7 @@ class CharacterStorage extends \DSXI\Handle
 		]);
 
 		if (!$characters) {
-			return false;
+			die('Could not find a character with this ID, go back and do it properly :D');
 		}
 
 		foreach($characters as $i => $character) {
@@ -182,5 +182,25 @@ class CharacterStorage extends \DSXI\Handle
 
 		$sql = sprintf('UPDATE chars SET %s WHERE charid = :id', implode(', ', $update));
 		$this->dbs->sql($sql, $binds);
+	}
+
+	//
+	// Update some table with some values
+	//
+	public function updateTableValues($charId, $table, $request)
+	{
+		$update = [];
+		foreach($request->request->all() as $key => $value) {
+			$update[] = sprintf("%s = '%s'", $key, $value);
+		}
+
+		// implode
+		$update = implode(',', $update);
+
+		// build sql
+		$sql = sprintf('UPDATE %s SET %s WHERE charid = :charid', $table, $update);
+		$this->dbs->sql($sql, [
+			':charid' => $charId,
+		]);
 	}
 }

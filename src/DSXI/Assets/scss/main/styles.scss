@@ -155,3 +155,51 @@ code.block {
 		padding: 20px;
 	}
 }
+
+.inventory-grid {
+	@include cf();
+
+	.inv-grid-slot {
+		display: inline-block;
+		position: relative;
+		width: 52px; height: 52px;
+		background-color: #eee;
+
+		&:hover {
+			background-color: $colorPrimary;
+			cursor: pointer;
+		}
+
+		> img {
+			@include center();
+		}
+
+		> span {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			display: block;
+			background-color: #ddd;
+			font-size: 11px;
+			font-family: Verdana;
+			padding: 2px 4px;
+		}
+	}
+}
+
+.inventory-gil {
+	font-size: 18px;
+	line-height: 24px;
+	height: 24px;
+	margin-bottom: 20px;
+
+	em {
+		font-weight: bold;
+	}
+
+	img {
+		height: 24px;
+		margin-right: 10px;
+		vertical-align: bottom;
+	}
+}

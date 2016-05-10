@@ -11,9 +11,40 @@
 
 	<div class="page">
 
-		<h1>Inventory Management: <strong>{{ character.name }}</strong></h1>
+		<h1>Inventory: <a href="/characters/update/{{ character.id }}/{{ character.name }}">{{ character.name }}</a></h1>
 
-		
+		<script src="http://static.ffxiah.com/js/lib/AH.v1459272490.js"></script>
+
+		{% set gil = inventory[0][65535] %}
+		<div class="inventory-gil">
+			<img src="http://static.ffxiah.com/images/icon/{{ gil.id }}.png">
+			<em>{{ gil.quantity|number_format }}</em> gil
+		</div>
+
+		{% set names = {
+			0: 'Inventory',
+			1: 'Mog Safe',
+			5: 'Mog Satchel',
+			6: 'Mog Sack',
+			7: 'Mog Case',
+			8: 'Mog Wardrobe',
+			9: 'Mog Safe 2',
+		} %}
+
+		<div class="inventory-grid">
+		{% for location, items in inventory %}
+			<h3>Storage: <strong>{{ names[location] is defined ? names[location] : location }}</strong></h3>
+			<br>
+			{% for item in items if item.id != 65535 %}
+				<a class="inv-grid-slot" href="http://www.ffxiah.com/item/{{ item.id }}" target="_blank">
+					<img src="http://static.ffxiah.com/images/icon/{{ item.id }}.png">
+					<span>x{{ item.quantity }}</span>
+				</a>
+			{% endfor %}
+			<hr>
+		{% endfor %}
+		</div>
+
 
 	</div>
 

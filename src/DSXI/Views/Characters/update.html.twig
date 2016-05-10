@@ -10,13 +10,13 @@
 
 	<div class="page">
 
-		<h1>Updating: <strong>{{ character.name }}</strong></h1>
+		<h1>Updating: <a href="/characters/update/{{ character.id }}/{{ character.name }}">{{ character.name }}</a></h1>
 
 		<p>After saving, the character must either re-log or zone for changes to effect. (Relogging is the most reliable method)</p>
 
 		<form method="post" class="character-settings-form">
 			<div class="panel">
-				<h2>Profile</h2>
+				<h2>Account</h2>
 				<div>
 					{{ Macros.form('charname', 'Name', character.name, 'text') }}
 					{{ Macros.form('gmlevel', 'GM Level', character.gmlevel, 'select', {
@@ -37,6 +37,9 @@
 			<h2>Actions</h2>
 			<div>
 				<a href="/characters/update/{{ character.id }}/{{ character.name }}/inventory" class="btn btn-primary">Inventory Management</a>
+				<a href="/characters/update/{{ character.id }}/{{ character.name }}/storage" class="btn btn-primary">Cap Storage</a>
+				<a href="/characters/update/{{ character.id }}/{{ character.name }}/profile" class="btn btn-primary">Update Rank/Fame</a>
+				<a href="/characters/update/{{ character.id }}/{{ character.name }}/points" class="btn btn-primary">Update Points</a>
 			</div>
 		</div>
 

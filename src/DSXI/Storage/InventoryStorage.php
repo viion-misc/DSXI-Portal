@@ -24,18 +24,26 @@ class InventoryStorage extends \DSXI\Handle
 		$sql = sprintf('SELECT * FROM char_inventory
 			WHERE char_inventory.charid = :charid');
 
-		$inventory = $this->dbs->sql($sql, [
+		$results = $this->dbs->sql($sql, [
 			':charid' => $id,
 		]);
 
-		foreach($inventory as $i => $item) {
-			show($item);
-			die;
-			$inventory[$i] = new Item($item);
+		$inventory = [];
+		foreach($results as $i => $item) {
+			$inventory[$item['location']][$item['itemId']] = new Item($item);
 		}
 
+		return $inventory;
+	}
 
-
-		return new Character($result[0]);
+	//
+	// Increase size of storage
+	//
+	public function setStorageSize($charid)
+	{
+		$sql = 'UPDATE char_storage SET `inventory` = 80, `safe` = 80, `locker` = 80, `satchel` = 80, `sack` = 80, `case` = 80 WHERE charid = :charid';
+		$this->dbs->sql($sql, [
+			':charid' => $charid,
+		]);
 	}
 }

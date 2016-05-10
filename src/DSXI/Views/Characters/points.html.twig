@@ -1,0 +1,28 @@
+{% extends 'Default/base.html.twig' %}
+{% set page = 'characters' %}
+
+{% block body %}
+
+	{{ Macros.breadcrum([
+		[ 'Characters', '/characters' ],
+		[ 'Updating' ],
+		[ 'Profile' ],
+	]) }}
+
+	<div class="page">
+		<h1>Updating: <a href="/characters/update/{{ character.id }}/{{ character.name }}">{{ character.name }}</a></h1>
+		<p>After saving, the character must either re-log or zone for changes to effect.</p>
+		<form method="post">
+			<div class="panel">
+				<h2>Profile</h2>
+				<div>
+				{% for field, value in fields if field != 'charid' %}
+					{{ Macros.form(field, field|title, value, 'text') }}
+				{% endfor %}
+
+				<button type="submit" class="btn btn-success">Save</button>
+				</div>
+			</div>
+		</form>
+	</div>
+{% endblock %}

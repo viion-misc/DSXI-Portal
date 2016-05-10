@@ -4,7 +4,8 @@ namespace DSXI\Routes;
 
 use Symfony\Component\HttpFoundation\Request;
 
-use DSXI\Storage\ServerStorage;
+use DSXI\Storage\ServerStorage,
+    DSXI\Storage\InventoryStorage;
 
 trait Server
 {

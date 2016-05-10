@@ -55,7 +55,7 @@ trait Characters
 		});
 
 		//
-		// Update a character
+		// Manage character inventory
 		//
 		$this->route('/characters/update/{id}/{name}/inventory', 'GET|POST', function(Request $request, $id, $name)
 		{
@@ -63,9 +63,6 @@ trait Characters
 
 			$storage = new CharacterStorage();
 			$character = $storage->getCharacterById($id);
-			if (!$character) {
-				die('Could not find a character with this ID, go back and do it properly :D');
-			}
 
 			// get inventory for character
 			$itemStorage = new InventoryStorage();
@@ -73,7 +70,74 @@ trait Characters
 
 			return $this->respond('Characters/inventory.html.twig', [
 				'character' => $character,
+				'inventory' => $inventory,
 			]);
 		});
+
+		//
+        // Cap the storage for a character
+        //
+        $this->route('/characters/update/{id}/{name}/storage', 'GET', function(Request $request, $id, $name)
+        {
+			$this->mustBeOnline();
+
+            $storage = new InventoryStorage();
+            $storage->setStorageSize($id);
+
+            $this->get('session')->add('success', 'All inventory storages have been set to the cap.');
+            return $this->redirect(sprintf('/characters/update/%s/%s', $id, $name));
+        });
+
+		//
+        // Cap the storage for a character
+        //
+        $this->route('/characters/update/{id}/{name}/profile', 'GET|POST', function(Request $request, $id, $name)
+        {
+            $dbs = $this->get('database');
+			$this->mustBeOnline();
+
+			// get character
+			$storage = new CharacterStorage();
+			$character = $storage->getCharacterById($id);
+
+			if ($request->isMethod('POST')) {
+				$storage->updateTableValues($id, 'char_profile', $request);
+				$this->get('session')->add('success', 'Character profile has been updated!');
+			}
+
+			// get profile
+			$fields = $dbs->sql('SELECT * FROM char_profile WHERE charid = :id', [ ':id' => $id ])[0];
+
+			return $this->respond('Characters/profile.html.twig', [
+				'character' => $character,
+				'fields' => $fields,
+			]);
+        });
+
+		//
+        // Cap the storage for a character
+        //
+        $this->route('/characters/update/{id}/{name}/points', 'GET|POST', function(Request $request, $id, $name)
+        {
+            $dbs = $this->get('database');
+			$this->mustBeOnline();
+
+			// get character
+			$storage = new CharacterStorage();
+			$character = $storage->getCharacterById($id);
+
+			if ($request->isMethod('POST')) {
+				$storage->updateTableValues($id, 'char_points', $request);
+				$this->get('session')->add('success', 'Character points has been updated!');
+			}
+
+			// get profile
+			$fields = $dbs->sql('SELECT * FROM char_points WHERE charid = :id', [ ':id' => $id ])[0];
+
+			return $this->respond('Characters/points.html.twig', [
+				'character' => $character,
+				'fields' => $fields,
+			]);
+        });
     }
 }

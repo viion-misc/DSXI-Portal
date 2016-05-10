@@ -43,13 +43,13 @@
     <fieldset class="form-group character-field-row">
         <div class="row">
             <div class="col-md-4">
-                <label for="{{ id }}">{{ name }}</label>
+                <label for="{{ id }}">{{ name|replace({'_' : ' '}) }}</label>
             </div>
             <div class="col-md-8">
                 {% if type == 'select' %}
                     <select  class="form-control" id="{{ id }}" name="{{ id }}">
                     {% for id, name in options %}
-                        <option value="{{ id }}" {% if id == value %}selected{% endif %}>{{ name }}</option>
+                        <option value="{{ id }}" {% if id == value %}selected{% endif %}>{{ name|replace({'_' : ' '}) }}</option>
                     {% endfor %}
                     </select>
                 {% else %}
