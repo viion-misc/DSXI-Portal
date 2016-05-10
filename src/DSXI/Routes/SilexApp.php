@@ -67,6 +67,7 @@ class SilexApp extends \DSXI\Handle
             $this->addGlobal('server_name', SERVER_NAME);
             $this->addGlobal('server_logo', SERVER_LOGO);
             $this->addGlobal('server_restart_delay', SERVER_RESTART_DELAY);
+            $this->addGlobal('auction_house_default_price', AUCTION_HOUSE_DEFAULT_PRICE);
         });
 
         // boot

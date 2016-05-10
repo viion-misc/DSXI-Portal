@@ -22,6 +22,9 @@ return [
         'bash /dsxi/setup/server_stop',
     ],
 
+    // default sale price for auction house
+    'auction_house_default_price' => 1000,
+
     // Site settings
     'silex_debug' => true,
     'domain' => '.dsxi.server',

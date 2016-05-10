@@ -179,16 +179,11 @@ trait Server
         //
         $this->route('/server/auctionhouse/populate', 'GET', function(Request $request)
         {
-            $dbs = $this->get('database');
-            $armor = $dbs->sql('SELECT * FROM `item_armor`');
+            $storage = new ServerStorage();
+            $storage->populateAuctionHouse();
 
-            show($armor);
-
-
-
-            die;
-            $this->get('session')->add('success', 'Game data has been imported');
-            return $this->redirect('/server/gamedata');
+            $this->get('session')->add('success', 'The auction house has been populated, run the script again to add more items.');
+            return $this->redirect('/server');
         });
     }
 }
