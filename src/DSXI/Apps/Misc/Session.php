@@ -13,6 +13,7 @@ class Session
     {
         // Settings
         ini_set('session.name', 'dsxi');
+        session_set_cookie_params($this->defaultExpireTime, '/', DOMAIN, false, false);
 
         // Start
         $this->setExpires($this->defaultExpireTime);
