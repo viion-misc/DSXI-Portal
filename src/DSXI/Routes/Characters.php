@@ -139,5 +139,21 @@ trait Characters
 				'fields' => $fields,
 			]);
         });
+
+		//
+        // Unlock all jobs on a character
+        //
+        $this->route('/characters/update/{id}/{name}/jobs/unlock', 'GET', function(Request $request, $id, $name)
+        {
+            $dbs = $this->get('database');
+			$this->mustBeOnline();
+
+			$dbs->sql('UPDATE char_jobs SET unlocked = 2097150, genkai = 75 WHERE charid = :charid', [
+				':charid' => $id,
+			]);
+
+			$this->get('session')->add('success', 'Character jobs have been unlocked, zone to see the effects.');
+			return $this->redirect(sprintf('/characters/update/%s/%s', $id, $name));
+        });
     }
 }

@@ -9,15 +9,10 @@ class Session
 {
     private $defaultExpireTime = (60*5);
 
-    function __construct($name = 'dsxi', $config = [])
+    function __construct()
     {
         // Settings
-        ini_set('session.name', $name);
-
-        if (!empty($config)) {
-            ini_set('session.save_handler', 'memcached');
-            ini_set('session.save_path', $config['host'] .':'. $config['port']);
-        }
+        ini_set('session.name', 'dsxi');
 
         // Start
         $this->setExpires($this->defaultExpireTime);

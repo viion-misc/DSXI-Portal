@@ -109,7 +109,10 @@ class SilexApp extends \DSXI\Handle
     //
     public function redirect($url)
     {
-        return $this->Silex->redirect($url);
+        header('Location: '. $url);
+        exit();
+        
+        //return $this->Silex->redirect($url);
     }
 
     //

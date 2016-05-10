@@ -10,7 +10,7 @@ return [
     // Adjust the delay (seconds) for starting/stopping the server.
     // Do not set this below 30 seconds or you will have issues!
     'server_restart_delay' => 60,
-    'server_user' => 'vagrant',
+    'server_user' => 'dsxi',
 
     // Commands to start the server
     'server_start' => [
@@ -27,7 +27,7 @@ return [
 
     // Site settings
     'silex_debug' => true,
-    'domain' => '.dsxi.server',
+    'domain' => '.encorexi.com',
     'cookie_expire' => (86400 * 7),
 
     // Database
