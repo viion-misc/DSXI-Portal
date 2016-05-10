@@ -30,6 +30,11 @@ class InventoryStorage extends \DSXI\Handle
 
 		$inventory = [];
 		foreach($results as $i => $item) {
+			if (isset($inventory[$item['location']][$item['itemId']])) {
+				$inventory[$item['location']][$item['itemId']]->quantity += $item['quantity'];
+				continue;
+				
+			}
 			$inventory[$item['location']][$item['itemId']] = new Item($item);
 		}
 
