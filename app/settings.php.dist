@@ -27,7 +27,7 @@ return [
 
     // Site settings
     'silex_debug' => true,
-    'domain' => '.encorexi.com',
+    'domain' => '.dsxi.server',
     'cookie_expire' => (86400 * 7),
 
     // Database
