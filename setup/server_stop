@@ -1,5 +1,5 @@
 #!/bin/bash
-FF_DIR='~/ffxi'
+FF_DIR='/home/vagrant/ffxi'
 cd $FF_DIR/
 
 echo "Stopping Servers ..."

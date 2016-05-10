@@ -22,9 +22,9 @@
 				this site was updated, saving will not be possible (work in progress)
 			</p>
 
-			<div class="alert alert-info">
+			<div class="alert alert-warning">
 				<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-				Saving this form will restart the server. It takes {{ server_restart_delay }} seconds to fully restart the server.
+				Once you have saved, you must <a href="/server">restart your server</a>.
 			</div>
 
 			<hr>
@@ -113,26 +113,5 @@
 			<button type="submit" class="btn btn-success btn-block btn-lg">Save Server Settings and Restart Server</button>
 
 		</form>
-
-		<div id="saveServerSettingsModal" class="modal fade">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Restarting Server</h4>
-					</div>
-					<div class="modal-body">
-						<p>Server Settings have been saved, your server is restarting.
-							This takes roughly {{ server_restart_delay }} seconds.
-							Please allow it time to finish before trying to log back into the game.</p>
-
-						<div class="restart-countdown">
-							<strong>Restart Timer:</strong> <em>{{ server_restart_delay }}</em>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
 	</div>
-
 {% endblock %}

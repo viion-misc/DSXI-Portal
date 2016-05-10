@@ -18,8 +18,12 @@ trait Server
             $storage = new ServerStorage();
             $settings = $storage->getServerSettings();
 
+            $server = $this->get('server');
+
             return $this->respond('Server/index.html.twig', [
-                'settings' => $settings
+                'settings' => $settings,
+                'cmd_start' => $server->start,
+                'cmd_stop' => $server->stop,
             ]);
         });
 
@@ -67,14 +71,14 @@ trait Server
                 $welcomeMessage = str_ireplace(array_keys($findAndReplace), $findAndReplace, file_get_contents(ROOT .'/server/template.server_message.conf'));
 
                 // Store all the settings
-                $storage->saveServerSettingsFile(ROOT .'/server/generated.settings.lua', '/home/'. SERVER_USER .'/ffxi/scripts/globals/settings.lua', $settingsLua);
-                $storage->saveServerSettingsFile(ROOT .'/server/generated.login_darkstar.conf', '/home/'. SERVER_USER .'/ffxi/conf/login_darkstar.conf', $loginDarkstar);
-                $storage->saveServerSettingsFile(ROOT .'/server/generated.map_darkstar.conf', '/home/'. SERVER_USER .'/ffxi/conf/map_darkstar.conf', $mapDarkstar);
-                $storage->saveServerSettingsFile(ROOT .'/server/generated.server_message.conf', '/home/'. SERVER_USER .'/ffxi/conf/server_message.conf', $welcomeMessage);
+                $server = $this->get('server');
+                $server->setFile(ROOT .'/server/generated.settings.lua', '/home/'. SERVER_USER .'/ffxi/scripts/globals/settings.lua', $settingsLua);
+                $server->setFile(ROOT .'/server/generated.login_darkstar.conf', '/home/'. SERVER_USER .'/ffxi/conf/login_darkstar.conf', $loginDarkstar);
+                $server->setFile(ROOT .'/server/generated.map_darkstar.conf', '/home/'. SERVER_USER .'/ffxi/conf/map_darkstar.conf', $mapDarkstar);
+                $server->setFile(ROOT .'/server/generated.server_message.conf', '/home/'. SERVER_USER .'/ffxi/conf/server_message.conf', $welcomeMessage);
 
                 // Restart server
-                $this->get('session')->add('success', 'Settings have been saved and the server has been restarted.');
-                $this->get('server')->restart();
+                $this->get('session')->add('success', 'Settings have been saved, please restart your server.');
 
                 // get server settings again
                 $settings = $storage->getServerSettings();
@@ -97,10 +101,8 @@ trait Server
             $savefile = ROOT .'/server/settings.generated.lua';
 
             // save
-            $storage = new ServerStorage();
-            $storage->saveServerSettingsFile($savefile, $data, true);
-
-            $this->get('session')->add('success', 'Server settings have been recovered from the project repository source code. You will need to manually restart the server.');
+            $this->get('server')->setFile($savefile, $data, true);
+            $this->get('session')->add('success', 'Server settings have been recovered from the project repository source code, please restart your server.');
 
             return $this->redirect('/server');
         });
@@ -148,24 +150,39 @@ trait Server
 
             $folder = ROOT .'/data/';
             $files = array_diff(scandir($folder), ['..', '.']);
+            $insert = [];
 
             foreach($files as $file)
             {
                 $xml = simplexml_load_file($folder . $file);
-                $data = json_decode(json_encode((array) $xml), 1);
 
-                foreach($data['thing'] as $i => $item)
+                foreach($xml as $i => $item)
                 {
-                    $name = $item['field'][6];
+                    show($item->attributes());
 
-                    show($name);
+                    die;
                 }
-
-                die;
             }
 
 
-            show($files);
+            show($insert);
+
+
+
+            die;
+            $this->get('session')->add('success', 'Game data has been imported');
+            return $this->redirect('/server/gamedata');
+        });
+
+        //
+        // Server game data process
+        //
+        $this->route('/server/auctionhouse/populate', 'GET', function(Request $request)
+        {
+            $dbs = $this->get('database');
+            $armor = $dbs->sql('SELECT * FROM `item_armor`');
+
+            show($armor);
 
 
 

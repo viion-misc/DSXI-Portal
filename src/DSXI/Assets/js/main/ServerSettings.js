@@ -27,7 +27,7 @@ class ServerSettingsClass
 			})
 		});
 
-		$('.server-settings-form').on('submit', (event) => {
+		$('.btn-server-restart').on('click', (event) => {
 			$('#saveServerSettingsModal').modal('show');
 
 			var timer = setInterval(() => {

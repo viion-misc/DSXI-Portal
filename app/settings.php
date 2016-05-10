@@ -12,6 +12,16 @@ return [
     'server_restart_delay' => 60,
     'server_user' => 'vagrant',
 
+    // Commands to start the server
+    'server_start' => [
+        'bash /dsxi/setup/server_start',
+    ],
+
+    // Commands to stop the server
+    'server_stop' => [
+        'bash /dsxi/setup/server_stop',
+    ],
+
     // Site settings
     'silex_debug' => true,
     'domain' => '.dsxi.server',

@@ -1,10 +1,10 @@
 #!/bin/bash
-FF_DIR='~/ffxi'
+FF_DIR='/home/vagrant/ffxi'
 cd $FF_DIR/
 
 echo "Starting Servers ..."
-/usr/bin/screen -dmS lobby $FF_DIR/dsconnect
-/usr/bin/screen -dmS game $FF_DIR/dsgame
-/usr/bin/screen -dmS search $FF_DIR/dssearch
+sudo -H -u vagrant /usr/bin/screen -dmS lobby $FF_DIR/dsconnect
+sudo -H -u vagrant /usr/bin/screen -dmS game $FF_DIR/dsgame
+sudo -H -u vagrant /usr/bin/screen -dmS search $FF_DIR/dssearch
 sleep 1
 screen -ls
