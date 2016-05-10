@@ -148,7 +148,11 @@ trait Characters
             $dbs = $this->get('database');
 			$this->mustBeOnline();
 
-			$dbs->sql('UPDATE char_jobs SET unlocked = 2097150, genkai = 75 WHERE charid = :charid', [
+			$dbs->sql('UPDATE char_jobs SET
+				unlocked = 2097150, genkai = 75
+				pld = 1, drk = 1, bst = 1, rng = 1, sam = 1, nin = 1, drg = 1, smn = 1,
+				blu = 1, cor = 1, pup = 1, dnc = 1, sch = 1, geo = 1, run = 1
+				WHERE charid = :charid', [
 				':charid' => $id,
 			]);
 
