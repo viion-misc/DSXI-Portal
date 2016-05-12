@@ -58,7 +58,7 @@ trait Server
                             : $set['default_value']; // else set to default
 
                         $submitted[$set['variable']] = $value;
-                        $findAndReplace[sprintf('{{ %s }}', $set['variable'])] = $value;
+                        $findAndReplace[sprintf('{{ %s }}', $set['variable'])] = (string)$value;
                     }
                 }
 
