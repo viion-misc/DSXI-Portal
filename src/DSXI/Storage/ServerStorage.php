@@ -43,8 +43,8 @@ class ServerStorage extends \DSXI\Handle
 			$rand2 = mt_rand(0,99999999);
 
 			$values[] = sprintf("(:r%s, :r%s)", $rand1, $rand2);
-			$binds[sprintf(':r%s', $rand1)] = $variable;
-			$binds[sprintf(':r%s', $rand2)] = $value;
+			$binds[sprintf(':r%s', $rand1)] = (string)$variable;
+			$binds[sprintf(':r%s', $rand2)] = (string)$value;
 		}
 
 		$sql = 'INSERT INTO portal_server_settings (variable, set_value) VALUES %s ON DUPLICATE KEY UPDATE set_value=VALUES(set_value)';
