@@ -43,7 +43,7 @@ trait Server
                 // organize submitted
                 $submitted = [];
                 foreach($request->request->all() as $key => $value) {
-                    $submitted[$key] = $value == 'on' ? 1 : $value;
+                    $submitted[$key] = $value == 'on' ? 1 : (string)$value;
                 }
 
                 // Save settings to database

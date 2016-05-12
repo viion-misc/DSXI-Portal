@@ -14,7 +14,7 @@
 {% endmacro %}
 
 {% macro server(setting, isCheckbox) %}
-{% set value = setting.set_value ? setting.set_value : setting.default_value %}
+{% set value = setting.set_value or setting.set_value == '0' ? setting.set_value : setting.default_value %}
     <fieldset class="form-group server-field-row">
         {% if isCheckbox %}
             <input type="checkbox" class="form-control" id="{{ setting.variable }}" name="{{ setting.variable }}" {% if value %}checked="checked"{% endif %}>
