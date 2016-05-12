@@ -1,5 +1,3 @@
-Heading ">> Updating the DSXI Server <<"
-
 # Where FFXI Will be stored, don't change this unless you have to
 serverInstallPath="/home/vagrant/ffxi"
 
@@ -12,22 +10,18 @@ mysqlDbUser="dsxi"
 mysqlDbPass="dsxi"
 mysqlDbName="dsxi"
 
-Text "Setting Default MySQL Passwords"
+echo "Setting Default MySQL Passwords"
 echo "mysql-server mysql-server/root_password password $mysqlPassword" | debconf-set-selections
 echo "mysql-server mysql-server/root_password_again password $mysqlPassword" | debconf-set-selections
 
 
 # Compile dark star
-Info "Compiling Dark Star."
+echo "Compiling Dark Star."
 chmod +x $serverInstallPath/autogen.sh
 cd $serverInstallPath; ./autogen.sh; ./configure --enable-debug=gdb; make
-Text "Server Compiled Successfully"
-
-# Create database
-Title "UPDATE CONFIG"
 
 # Updating config
-Info "Updating DS Config Files ..."
+echo "Updating DS Config Files ..."
 perl -pi -e 's/mysql_login:     root/mysql_login:     '$mysqlDbUser'/g' $serverInstallPath/conf/login_darkstar.conf
 perl -pi -e 's/mysql_password:  root/mysql_password:  '$mysqlDbPass'/g' $serverInstallPath/conf/login_darkstar.conf
 perl -pi -e 's/mysql_database:  dspdb/mysql_database:  '$mysqlDbName'/g' $serverInstallPath/conf/login_darkstar.conf
@@ -43,6 +37,7 @@ perl -pi -e 's/    map_config.mysql_database = "dspdb";/    map_config.mysql_dat
 perl -pi -e 's/    search_config.mysql_login = "root";/    search_config.mysql_login = "'$mysqlDbUser'";/g' $serverInstallPath/src/search/search.cpp
 perl -pi -e 's/    search_config.mysql_password = "root";/    search_config.mysql_password = "'$mysqlDbPass'";/g' $serverInstallPath/src/search/search.cpp
 perl -pi -e 's/    search_config.mysql_database = "dspdb";/    search_config.mysql_database = "'$mysqlDbName'";/g' $serverInstallPath/src/search/search.cpp
+clear
 
-Title "XI Server Updated"
+echo "XI Server Updated"
 sudo -H -u vagrant bash /dsxi/setup/server_start
